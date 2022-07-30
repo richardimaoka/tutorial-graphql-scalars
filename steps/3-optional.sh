@@ -6,3 +6,5 @@ cd ../ || exit               # REMOVE THIS IN aggregate.sh - cd to the git repos
 git apply # restore the EmailAddress information from the string type in JavaScript
 
 # if you use a text schema definition, you can't use ScalrNameTypeDefinition
+
+# many more scalar types
