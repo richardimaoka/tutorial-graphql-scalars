@@ -8,6 +8,8 @@ generates:
       - "typescript-resolvers"
     config:
       avoidOptionals: true
+      scalars:
+        Timestamp: string
 hooks:
   afterOneFileWrite:
     - npx prettier --write

@@ -3,18 +3,15 @@
 cd "$(dirname "$0")" || exit # REMOVE THIS IN aggregate.sh
 cd ../ || exit               # REMOVE THIS IN aggregate.sh - cd to the git repository root
 
+# npm install graphql-scalars
+# EmailAddress - schema.gql, data/Query.json, Apollo Studio
+#   not from Query.json, but override in index.ts, and return 10 -> error
+#   config.yml to set string -> static type checking!
+#   however, returning a string with wrong-format passes static typing...
 
-git apply # schema.gql
-git apply # use generated types in src/index.ts
-
-git apply # use data.json
-git apply # define context type
-
-# query from apollo studio
-
-
-
-
+# argument type
+#   Apollo Studio, send wrong type - error
+#   Apollo Studio, send wrong format - error
 
 
 

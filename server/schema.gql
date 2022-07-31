@@ -1,6 +1,8 @@
 scalar URL
+scalar Timestamp
 
 type Query {
   hello: String
   url: URL
+  search(from: Timestamp, to: Timestamp): [String]
 }

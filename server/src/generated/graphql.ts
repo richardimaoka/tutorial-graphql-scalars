@@ -21,13 +21,20 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
+  Timestamp: string;
   URL: any;
 };
 
 export type Query = {
   __typename?: "Query";
   hello: Maybe<Scalars["String"]>;
+  search: Maybe<Array<Maybe<Scalars["String"]>>>;
   url: Maybe<Scalars["URL"]>;
+};
+
+export type QuerySearchArgs = {
+  from: InputMaybe<Scalars["Timestamp"]>;
+  to: InputMaybe<Scalars["Timestamp"]>;
 };
 
 export type ResolverTypeWrapper<T> = Promise<T> | T;
@@ -140,6 +147,7 @@ export type ResolversTypes = {
   Boolean: ResolverTypeWrapper<Scalars["Boolean"]>;
   Query: ResolverTypeWrapper<{}>;
   String: ResolverTypeWrapper<Scalars["String"]>;
+  Timestamp: ResolverTypeWrapper<Scalars["Timestamp"]>;
   URL: ResolverTypeWrapper<Scalars["URL"]>;
 };
 
@@ -148,6 +156,7 @@ export type ResolversParentTypes = {
   Boolean: Scalars["Boolean"];
   Query: {};
   String: Scalars["String"];
+  Timestamp: Scalars["Timestamp"];
   URL: Scalars["URL"];
 };
 
@@ -156,8 +165,19 @@ export type QueryResolvers<
   ParentType extends ResolversParentTypes["Query"] = ResolversParentTypes["Query"]
 > = {
   hello: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
+  search: Resolver<
+    Maybe<Array<Maybe<ResolversTypes["String"]>>>,
+    ParentType,
+    ContextType,
+    Partial<QuerySearchArgs>
+  >;
   url: Resolver<Maybe<ResolversTypes["URL"]>, ParentType, ContextType>;
 };
+
+export interface TimestampScalarConfig
+  extends GraphQLScalarTypeConfig<ResolversTypes["Timestamp"], any> {
+  name: "Timestamp";
+}
 
 export interface UrlScalarConfig
   extends GraphQLScalarTypeConfig<ResolversTypes["URL"], any> {
@@ -166,5 +186,6 @@ export interface UrlScalarConfig
 
 export type Resolvers<ContextType = any> = {
   Query: QueryResolvers<ContextType>;
+  Timestamp: GraphQLScalarType;
   URL: GraphQLScalarType;
 };

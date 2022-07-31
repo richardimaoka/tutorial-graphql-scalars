@@ -7,4 +7,7 @@ git apply # restore the EmailAddress information from the string type in JavaScr
 
 # if you use a text schema definition, you can't use ScalrNameTypeDefinition
 
+# Store and Reviewer structure
+
 # many more scalar types
+
