@@ -13,7 +13,5 @@ cd ../ || exit               # REMOVE THIS IN aggregate.sh - cd to the git repos
 #   Apollo Studio, send wrong type - error
 #   Apollo Studio, send wrong format - error
 
-
-
-npm run generate
+run generate
 npm start
