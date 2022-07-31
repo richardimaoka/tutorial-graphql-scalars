@@ -1,4 +1,8 @@
-import { GraphQLResolveInfo } from "graphql";
+import {
+  GraphQLResolveInfo,
+  GraphQLScalarType,
+  GraphQLScalarTypeConfig,
+} from "graphql";
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = {
@@ -17,11 +21,13 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
+  URL: any;
 };
 
 export type Query = {
   __typename?: "Query";
   hello: Maybe<Scalars["String"]>;
+  url: Maybe<Scalars["URL"]>;
 };
 
 export type ResolverTypeWrapper<T> = Promise<T> | T;
@@ -134,6 +140,7 @@ export type ResolversTypes = {
   Boolean: ResolverTypeWrapper<Scalars["Boolean"]>;
   Query: ResolverTypeWrapper<{}>;
   String: ResolverTypeWrapper<Scalars["String"]>;
+  URL: ResolverTypeWrapper<Scalars["URL"]>;
 };
 
 /** Mapping between all available schema types and the resolvers parents */
@@ -141,6 +148,7 @@ export type ResolversParentTypes = {
   Boolean: Scalars["Boolean"];
   Query: {};
   String: Scalars["String"];
+  URL: Scalars["URL"];
 };
 
 export type QueryResolvers<
@@ -148,8 +156,15 @@ export type QueryResolvers<
   ParentType extends ResolversParentTypes["Query"] = ResolversParentTypes["Query"]
 > = {
   hello: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
+  url: Resolver<Maybe<ResolversTypes["URL"]>, ParentType, ContextType>;
 };
+
+export interface UrlScalarConfig
+  extends GraphQLScalarTypeConfig<ResolversTypes["URL"], any> {
+  name: "URL";
+}
 
 export type Resolvers<ContextType = any> = {
   Query: QueryResolvers<ContextType>;
+  URL: GraphQLScalarType;
 };

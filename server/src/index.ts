@@ -1,5 +1,6 @@
 import { ApolloServer, gql } from "apollo-server";
 import * as fs from "fs";
+import { URLResolver } from "graphql-scalars";
 import { Query, Resolvers } from "./generated/graphql";
 
 const typeDefs = gql`
@@ -15,7 +16,11 @@ const resolvers: Resolvers<LoadingDataContext> = {
     hello: async (parent, args, context, info) => {
       return context.Query.hello;
     },
+    url: async (parent, args, context, info) => {
+      return context.Query.url;
+    },
   },
+  URL: URLResolver,
 };
 
 const readJsonFile = async (relativeFileName: string): Promise<any> => {
