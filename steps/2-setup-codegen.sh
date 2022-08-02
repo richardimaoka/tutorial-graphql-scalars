@@ -13,7 +13,7 @@ cd ../ || exit               # REMOVE THIS IN aggregate.sh - cd to the git repos
         #   Type '(parent: Person, _args: {}, _context: LoadingDataContext, _info: GraphQLResolveInfo) => number' is not assignable to type 'ResolverFn<Maybe<ResolverTypeWrapper<string>>, Person, LoadingDataContext, {}>'.
         #     Type 'number' is not assignable to type 'Maybe<ResolverTypeWrapper<string>> | Promise<Maybe<ResolverTypeWrapper<string>>>'.ts(2322)
         # graphql.ts(170, 3): The expected type comes from property 'emailAddress' which is declared here on type 'PersonResolvers<LoadingDataContext, Person>'
-#   however, returning a string with wrong-format passes static typing...
+#   however, returning a string with wrong-format passes static typing... https://github.com/richardimaoka/tutorial-graphql-scalars/commit/3396121dde6f3ced560498c3c07e84b7d1d0d03e
 
 # argument type
 #   Apollo Studio, send wrong type - error

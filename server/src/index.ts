@@ -13,8 +13,8 @@ interface LoadingDataContext {
 
 const resolvers: Resolvers<LoadingDataContext> = {
   Query: {
-    me(_parent, _args, _context, _info) {
-      return null;
+    me(_parent, _args, context, _info) {
+      return context.Query.me;
     },
   },
   Person: {
