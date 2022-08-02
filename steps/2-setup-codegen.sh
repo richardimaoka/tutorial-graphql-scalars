@@ -5,7 +5,7 @@ cd ../ || exit               # REMOVE THIS IN aggregate.sh - cd to the git repos
 
 # npm install graphql-scalars
 # EmailAddress - schema.gql, data/Query.json, Apollo Studio
-#   not from Query.json, but override in index.ts, and return 10 -> error
+#   override in index.ts, and return 10 -> error
 #   config.yml to set string -> static type checking!
 #   however, returning a string with wrong-format passes static typing...
 
