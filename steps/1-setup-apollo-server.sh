@@ -1,9 +1,14 @@
 #!/bin/sh
 
-cd "$(dirname "$0")" || exit # REMOVE THIS IN aggregate.sh
-cd ../ || exit               # REMOVE THIS IN aggregate.sh - cd to the git repository root
+# ## テンプレートのセットアップ
 
-# ## Set up Apollo Server
+# 下図のように 2 つのターミナルを使います。まずは 1 つ目ターミナルを立ち上げて、テンプレートのセットアップから GraphQL Codegen の実行までを行いましょう。
+
+#![アートボード 2.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/75738/7e11f3d9-5947-276f-2860-52e8a96f154e.png)
+
+#:large_orange_diamond: Action: 以下のコマンドを入力してください。一気に全部コピー & ペーストして実行して構いません。
+
+# ```terminal
 mkdir server
 # shellcheck disable=SC2164 # REMOVE THIS IN aggregate.sh
 cd server
@@ -25,7 +30,8 @@ npm install apollo-server graphql
 
 # install and setup graphql-codegen
 npm install -D @graphql-codegen/cli # @2.10.0
-# 本来ならここで npx graphql-code-generator initを行うが、対話モードに入ると時間がかかるので以下npm installで代替
+# ここで npx graphql-code-generator init を行ってもよいが、そうすると対話モードに入って手入力が増えるのと、
+# 結局は npx graphql-code-generator init で生成されたconfig.ymlを上書き更新することになるので、以下はnpm installのみ行って config.ymlは後ほど作成
 npm install --save-dev  @graphql-codegen/typescript @graphql-codegen/typescript-resolvers
 npm set-script generate "graphql-codegen --config codegen.yml --watch ./schema.gql" # update generate script
 
@@ -37,9 +43,38 @@ curl https://raw.githubusercontent.com/richardimaoka/tutorial-apollo-server-setu
 curl https://raw.githubusercontent.com/richardimaoka/tutorial-apollo-server-setup/main/server/schema.gql > schema.gql
 curl https://raw.githubusercontent.com/richardimaoka/tutorial-apollo-server-setup/main/server/src/index.ts > src/index.ts
 curl https://raw.githubusercontent.com/richardimaoka/tutorial-apollo-server-setup/main/server/data/Query.json > data/Query.json
+# ```
 
+:large_orange_diamond: Action: 以下のコマンドを入力してください。
+
+# ```terminal
 npm run generate
+# ```
 
-# shellcheck disable=SC2164 # REMOVE THIS IN aggregate.sh
-cd server
-npm start
+:white_check_mark: Result: 以下のように表示されれば OK です
+
+# ```terminal
+# ✔ Parse Configuration
+# ✔ Generate outputs
+#   ℹ Watching for changes...
+# ```
+
+# このターミナルはそのまま GraphQL Codegen プロセスを走らせ続けてください。
+
+# :large_orange_diamond: Action: 新しいターミナルを立ち上げてください。
+
+# ![アートボード 3.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/75738/434595ea-e610-5830-44f2-5a9e58e4c9fe.png)
+
+# :large_orange_diamond: Action: 以下のコマンドを入力してください。
+
+# ```terminal
+# cd server
+# npm start
+# ```
+
+:white_check_mark: Result: 以下のように表示されれば OK です。これで Apollo Server が立ち上がりました。
+
+# ```terminal
+# [INFO] 14:30:40 ts-node-dev ver. 1.1.8 (using ts-node ver. 9.1.1, typescript ver. 4.5.4)
+# 🚀  Server ready at http://localhost:4000/
+# ```
