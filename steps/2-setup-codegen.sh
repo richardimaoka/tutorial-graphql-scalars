@@ -6,7 +6,7 @@ cd ../ || exit               # REMOVE THIS IN aggregate.sh - cd to the git repos
 # npm install graphql-scalars
 # EmailAddress - schema.gql, data/Query.json, Apollo Studio
 #   override in index.ts, and return 10 -> error https://github.com/richardimaoka/tutorial-graphql-scalars/commit/5edea8ed55cf85d145edfc3c36746a74378aa148
-#   config.yml to set string -> static type checking!
+#   config.yml to set string -> static type checking! https://github.com/richardimaoka/tutorial-graphql-scalars/commit/5edea8ed55cf85d145edfc3c36746a74378aa148
         # ![2022-08-03_00h20_53.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/75738/25250495-3c88-b8e3-20f5-c89dca067c1e.png)
         # (property) emailAddress: Resolver<Maybe<ResolverTypeWrapper<string>>, Person, LoadingDataContext, {}>
         # Type '(parent: Person, _args: {}, _context: LoadingDataContext, _info: GraphQLResolveInfo) => number' is not assignable to type 'Resolver<Maybe<ResolverTypeWrapper<string>>, Person, LoadingDataContext, {}>'.
