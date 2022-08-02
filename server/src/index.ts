@@ -1,11 +1,6 @@
 import { ApolloServer, gql } from "apollo-server";
 import * as fs from "fs";
-import {
-  EmailAddressResolver,
-  TimestampResolver,
-  URLResolver,
-} from "graphql-scalars";
-import { EmailAddress } from "graphql-scalars/mocks";
+import { EmailAddressResolver } from "graphql-scalars";
 import { Query, Resolvers } from "./generated/graphql";
 
 const typeDefs = gql`
@@ -18,15 +13,15 @@ interface LoadingDataContext {
 
 const resolvers: Resolvers<LoadingDataContext> = {
   Query: {
-    me(parent, args, context, info) {
+    me(_parent, _args, _context, _info) {
       return null;
     },
   },
   Person: {
-    name(parent, args, context, info) {
+    name(parent, _args, _context, _info) {
       return parent.name;
     },
-    emailAddress(parent, args, context, info) {
+    emailAddress(parent, _args, _context, _info) {
       return parent.emailAddress;
     },
   },
