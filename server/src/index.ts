@@ -1,6 +1,11 @@
 import { ApolloServer, gql } from "apollo-server";
 import * as fs from "fs";
-import { TimestampResolver, URLResolver } from "graphql-scalars";
+import {
+  EmailAddressResolver,
+  TimestampResolver,
+  URLResolver,
+} from "graphql-scalars";
+import { EmailAddress } from "graphql-scalars/mocks";
 import { Query, Resolvers } from "./generated/graphql";
 
 const typeDefs = gql`
@@ -13,20 +18,19 @@ interface LoadingDataContext {
 
 const resolvers: Resolvers<LoadingDataContext> = {
   Query: {
-    hello: async (parent, args, context, info) => {
-      return context.Query.hello;
-    },
-    url: async (parent, args, context, info) => {
-      return context.Query.url;
-    },
-    search: async (parent, args, context, info) => {
-      const from = args.from;
-      const to = args.to;
-      return [];
+    me(parent, args, context, info) {
+      return null;
     },
   },
-  URL: URLResolver,
-  Timestamp: TimestampResolver,
+  Person: {
+    name(parent, args, context, info) {
+      return parent.name;
+    },
+    emailAddress(parent, args, context, info) {
+      return parent.emailAddress;
+    },
+  },
+  EmailAddress: EmailAddressResolver,
 };
 
 const readJsonFile = async (relativeFileName: string): Promise<any> => {

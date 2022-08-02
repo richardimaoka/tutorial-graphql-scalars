@@ -21,20 +21,18 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
-  Timestamp: string;
-  URL: any;
+  EmailAddress: any;
+};
+
+export type Person = {
+  __typename?: "Person";
+  emailAddress: Maybe<Scalars["EmailAddress"]>;
+  name: Maybe<Scalars["String"]>;
 };
 
 export type Query = {
   __typename?: "Query";
-  hello: Maybe<Scalars["String"]>;
-  search: Maybe<Array<Maybe<Scalars["String"]>>>;
-  url: Maybe<Scalars["URL"]>;
-};
-
-export type QuerySearchArgs = {
-  from: InputMaybe<Scalars["Timestamp"]>;
-  to: InputMaybe<Scalars["Timestamp"]>;
+  me: Maybe<Person>;
 };
 
 export type ResolverTypeWrapper<T> = Promise<T> | T;
@@ -145,47 +143,48 @@ export type DirectiveResolverFn<
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = {
   Boolean: ResolverTypeWrapper<Scalars["Boolean"]>;
+  EmailAddress: ResolverTypeWrapper<Scalars["EmailAddress"]>;
+  Person: ResolverTypeWrapper<Person>;
   Query: ResolverTypeWrapper<{}>;
   String: ResolverTypeWrapper<Scalars["String"]>;
-  Timestamp: ResolverTypeWrapper<Scalars["Timestamp"]>;
-  URL: ResolverTypeWrapper<Scalars["URL"]>;
 };
 
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = {
   Boolean: Scalars["Boolean"];
+  EmailAddress: Scalars["EmailAddress"];
+  Person: Person;
   Query: {};
   String: Scalars["String"];
-  Timestamp: Scalars["Timestamp"];
-  URL: Scalars["URL"];
+};
+
+export interface EmailAddressScalarConfig
+  extends GraphQLScalarTypeConfig<ResolversTypes["EmailAddress"], any> {
+  name: "EmailAddress";
+}
+
+export type PersonResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["Person"] = ResolversParentTypes["Person"]
+> = {
+  emailAddress: Resolver<
+    Maybe<ResolversTypes["EmailAddress"]>,
+    ParentType,
+    ContextType
+  >;
+  name: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type QueryResolvers<
   ContextType = any,
   ParentType extends ResolversParentTypes["Query"] = ResolversParentTypes["Query"]
 > = {
-  hello: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
-  search: Resolver<
-    Maybe<Array<Maybe<ResolversTypes["String"]>>>,
-    ParentType,
-    ContextType,
-    Partial<QuerySearchArgs>
-  >;
-  url: Resolver<Maybe<ResolversTypes["URL"]>, ParentType, ContextType>;
+  me: Resolver<Maybe<ResolversTypes["Person"]>, ParentType, ContextType>;
 };
 
-export interface TimestampScalarConfig
-  extends GraphQLScalarTypeConfig<ResolversTypes["Timestamp"], any> {
-  name: "Timestamp";
-}
-
-export interface UrlScalarConfig
-  extends GraphQLScalarTypeConfig<ResolversTypes["URL"], any> {
-  name: "URL";
-}
-
 export type Resolvers<ContextType = any> = {
+  EmailAddress: GraphQLScalarType;
+  Person: PersonResolvers<ContextType>;
   Query: QueryResolvers<ContextType>;
-  Timestamp: GraphQLScalarType;
-  URL: GraphQLScalarType;
 };

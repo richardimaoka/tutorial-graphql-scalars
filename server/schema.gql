@@ -1,8 +1,10 @@
-scalar URL
-scalar Timestamp
+scalar EmailAddress
+
+type Person {
+  emailAddress: EmailAddress
+  name: String
+}
 
 type Query {
-  hello: String
-  url: URL
-  search(from: Timestamp, to: Timestamp): [String]
+  me: Person
 }
