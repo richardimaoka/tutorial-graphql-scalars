@@ -9,7 +9,7 @@ generates:
     config:
       avoidOptionals: true
       scalars:
-        Timestamp: string
+        EmailAddress: string
 hooks:
   afterOneFileWrite:
     - npx prettier --write
