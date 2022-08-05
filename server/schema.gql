@@ -1,10 +1,10 @@
-type Query {
-  hello: String
-  search(department: String): [Employee]
+scalar EmailAddress
+
+type Person {
+  emailAddress: EmailAddress
+  name: String
 }
 
-type Employee {
-  name: String
-  jobTitle: String
-  department: String
+type Query {
+  me: Person
 }

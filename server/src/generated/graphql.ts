@@ -1,4 +1,8 @@
-import { GraphQLResolveInfo } from "graphql";
+import {
+  GraphQLResolveInfo,
+  GraphQLScalarType,
+  GraphQLScalarTypeConfig,
+} from "graphql";
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = {
@@ -17,23 +21,18 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
+  EmailAddress: any;
 };
 
-export type Employee = {
-  __typename?: "Employee";
-  department: Maybe<Scalars["String"]>;
-  jobTitle: Maybe<Scalars["String"]>;
+export type Person = {
+  __typename?: "Person";
+  emailAddress: Maybe<Scalars["EmailAddress"]>;
   name: Maybe<Scalars["String"]>;
 };
 
 export type Query = {
   __typename?: "Query";
-  hello: Maybe<Scalars["String"]>;
-  search: Maybe<Array<Maybe<Employee>>>;
-};
-
-export type QuerySearchArgs = {
-  department: InputMaybe<Scalars["String"]>;
+  me: Maybe<Person>;
 };
 
 export type ResolverTypeWrapper<T> = Promise<T> | T;
@@ -144,7 +143,8 @@ export type DirectiveResolverFn<
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = {
   Boolean: ResolverTypeWrapper<Scalars["Boolean"]>;
-  Employee: ResolverTypeWrapper<Employee>;
+  EmailAddress: ResolverTypeWrapper<Scalars["EmailAddress"]>;
+  Person: ResolverTypeWrapper<Person>;
   Query: ResolverTypeWrapper<{}>;
   String: ResolverTypeWrapper<Scalars["String"]>;
 };
@@ -152,21 +152,26 @@ export type ResolversTypes = {
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = {
   Boolean: Scalars["Boolean"];
-  Employee: Employee;
+  EmailAddress: Scalars["EmailAddress"];
+  Person: Person;
   Query: {};
   String: Scalars["String"];
 };
 
-export type EmployeeResolvers<
+export interface EmailAddressScalarConfig
+  extends GraphQLScalarTypeConfig<ResolversTypes["EmailAddress"], any> {
+  name: "EmailAddress";
+}
+
+export type PersonResolvers<
   ContextType = any,
-  ParentType extends ResolversParentTypes["Employee"] = ResolversParentTypes["Employee"]
+  ParentType extends ResolversParentTypes["Person"] = ResolversParentTypes["Person"]
 > = {
-  department: Resolver<
-    Maybe<ResolversTypes["String"]>,
+  emailAddress: Resolver<
+    Maybe<ResolversTypes["EmailAddress"]>,
     ParentType,
     ContextType
   >;
-  jobTitle: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
   name: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
@@ -175,16 +180,11 @@ export type QueryResolvers<
   ContextType = any,
   ParentType extends ResolversParentTypes["Query"] = ResolversParentTypes["Query"]
 > = {
-  hello: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
-  search: Resolver<
-    Maybe<Array<Maybe<ResolversTypes["Employee"]>>>,
-    ParentType,
-    ContextType,
-    Partial<QuerySearchArgs>
-  >;
+  me: Resolver<Maybe<ResolversTypes["Person"]>, ParentType, ContextType>;
 };
 
 export type Resolvers<ContextType = any> = {
-  Employee: EmployeeResolvers<ContextType>;
+  EmailAddress: GraphQLScalarType;
+  Person: PersonResolvers<ContextType>;
   Query: QueryResolvers<ContextType>;
 };
