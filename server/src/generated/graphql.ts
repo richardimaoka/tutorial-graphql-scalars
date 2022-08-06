@@ -25,7 +25,7 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
-  CountryCode: any;
+  CountryCode: myTypes.CountryString;
   EmailAddress: myTypes.EmailAddressString;
 };
 
