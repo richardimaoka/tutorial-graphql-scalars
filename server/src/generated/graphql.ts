@@ -21,11 +21,13 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
+  CountryCode: any;
   EmailAddress: string;
 };
 
 export type Person = {
   __typename?: "Person";
+  country: Maybe<Scalars["CountryCode"]>;
   emailAddress: Maybe<Scalars["EmailAddress"]>;
   name: Maybe<Scalars["String"]>;
 };
@@ -33,6 +35,11 @@ export type Person = {
 export type Query = {
   __typename?: "Query";
   me: Maybe<Person>;
+  search: Maybe<Array<Maybe<Person>>>;
+};
+
+export type QuerySearchArgs = {
+  country: InputMaybe<Scalars["CountryCode"]>;
 };
 
 export type ResolverTypeWrapper<T> = Promise<T> | T;
@@ -143,6 +150,7 @@ export type DirectiveResolverFn<
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = {
   Boolean: ResolverTypeWrapper<Scalars["Boolean"]>;
+  CountryCode: ResolverTypeWrapper<Scalars["CountryCode"]>;
   EmailAddress: ResolverTypeWrapper<Scalars["EmailAddress"]>;
   Person: ResolverTypeWrapper<Person>;
   Query: ResolverTypeWrapper<{}>;
@@ -152,11 +160,17 @@ export type ResolversTypes = {
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = {
   Boolean: Scalars["Boolean"];
+  CountryCode: Scalars["CountryCode"];
   EmailAddress: Scalars["EmailAddress"];
   Person: Person;
   Query: {};
   String: Scalars["String"];
 };
+
+export interface CountryCodeScalarConfig
+  extends GraphQLScalarTypeConfig<ResolversTypes["CountryCode"], any> {
+  name: "CountryCode";
+}
 
 export interface EmailAddressScalarConfig
   extends GraphQLScalarTypeConfig<ResolversTypes["EmailAddress"], any> {
@@ -167,6 +181,11 @@ export type PersonResolvers<
   ContextType = any,
   ParentType extends ResolversParentTypes["Person"] = ResolversParentTypes["Person"]
 > = {
+  country: Resolver<
+    Maybe<ResolversTypes["CountryCode"]>,
+    ParentType,
+    ContextType
+  >;
   emailAddress: Resolver<
     Maybe<ResolversTypes["EmailAddress"]>,
     ParentType,
@@ -181,9 +200,16 @@ export type QueryResolvers<
   ParentType extends ResolversParentTypes["Query"] = ResolversParentTypes["Query"]
 > = {
   me: Resolver<Maybe<ResolversTypes["Person"]>, ParentType, ContextType>;
+  search: Resolver<
+    Maybe<Array<Maybe<ResolversTypes["Person"]>>>,
+    ParentType,
+    ContextType,
+    Partial<QuerySearchArgs>
+  >;
 };
 
 export type Resolvers<ContextType = any> = {
+  CountryCode: GraphQLScalarType;
   EmailAddress: GraphQLScalarType;
   Person: PersonResolvers<ContextType>;
   Query: QueryResolvers<ContextType>;
