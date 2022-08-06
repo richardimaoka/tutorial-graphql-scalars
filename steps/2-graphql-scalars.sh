@@ -6,6 +6,8 @@ cd ../ || exit               # REMOVE THIS IN aggregate.sh - cd to the git repos
 # :large_orange_diamond: Action: 新しいターミナルを立ち上げてください。
 
 # ```:terminal
+# shellcheck disable=SC2164 # REMOVE THIS IN aggregate.sh
+cd server
 npm install graphql-scalars
 # ```
 
@@ -13,12 +15,12 @@ npm install graphql-scalars
 
 # ```graphql:server/schema.gql
 # scalar EmailAddress
-#
+
 # type Person {
 #   emailAddress: EmailAddress
 #   name: String
 # }
-#
+
 # type Query {
 #   me: Person
 # }
@@ -28,46 +30,41 @@ npm install graphql-scalars
 # ```ts:server/src/index.ts
 # import { ApolloServer, gql } from "apollo-server";
 # import * as fs from "fs";
-# import {
-#   EmailAddressResolver,
-#   TimestampResolver,
-#   URLResolver,
-# } from "graphql-scalars";
-# import { EmailAddress } from "graphql-scalars/mocks";
+# import { EmailAddressResolver } from "graphql-scalars";
 # import { Query, Resolvers } from "./generated/graphql";
-#
+
 # const typeDefs = gql`
 #   ${fs.readFileSync(__dirname.concat("/../schema.gql"), "utf8")}
 # `;
-#
+
 # interface LoadingDataContext {
 #   Query: Query;
 # }
-#
+
 # const resolvers: Resolvers<LoadingDataContext> = {
 #   Query: {
-#     me(parent, args, context, info) {
-#       return null;
+#     me(_parent, _args, context, _info) {
+#       return context.Query.me;
 #     },
 #   },
 #   Person: {
-#     name(parent, args, context, info) {
+#     name(parent, _args, _context, _info) {
 #       return parent.name;
 #     },
-#     emailAddress(parent, args, context, info) {
+#     emailAddress(parent, _args, _context, _info) {
 #       return parent.emailAddress;
 #     },
 #   },
 #   EmailAddress: EmailAddressResolver,
 # };
-#
+
 # const readJsonFile = async (relativeFileName: string): Promise<any> => {
 #   const jsonDataFile = __dirname.concat(relativeFileName);
 #   const fileContent = await fs.promises.readFile(jsonDataFile, "utf8");
 #   const jsonData = JSON.parse(fileContent);
 #   return jsonData;
 # };
-#
+
 # const server = new ApolloServer({
 #   typeDefs,
 #   resolvers,
@@ -84,14 +81,42 @@ npm install graphql-scalars
 #     }
 #   },
 # });
-#
+
 # // The  method launches a web server.
 # server.listen().then(({ url }) => {
 #   console.log();
 # });
-#```
+# ```
+
 
 # :large_orange_diamond: Action: 以下のとおり `server/data/Query.json` を更新してください。
+
+# ```json:server/data/Query.json
+# {
+#   "me": { 
+#     "emailAddress": "jason.summerwinnter@gmail.com",
+#     "name": "Jason Summerwinter"
+#   }
+# }
+# ```
+
+# :large_orange_diamond: Action: 以下のとおり `server/src/index.ts` を更新してください。
+#   override in index.ts, and return 10 -> error https://github.com/richardimaoka/tutorial-graphql-scalars/commit/5edea8ed55cf85d145edfc3c36746a74378aa148
+
+# :large_orange_diamond: Action: 以下のとおり `server/config.yml` を更新してください。
+#   config.yml to set string -> static type checking! https://github.com/richardimaoka/tutorial-graphql-scalars/commit/5edea8ed55cf85d145edfc3c36746a74378aa148
+# :white_check_mark: Result: Type Checkingが正しく効いてエラーが表示されます
+
+# :large_orange_diamond: Action: 以下のとおり `server/src/index.ts` を更新してください。
+#   however, returning a string with wrong-format passes static typing... https://github.com/richardimaoka/tutorial-graphql-scalars/commit/3396121dde6f3ced560498c3c07e84b7d1d0d03e
+# :white_check_mark: Result: stringであるというだけでType Checkingが成功してしまい、不正なメールアドレス形式を検知できません。
+
+
+# :large_orange_diamond: Action: Apollo Studio Explorer で以下のクエリを実行してください
+#   querying from apollo studio givens a runtime error
+# :white_check_mark: Result: 以下のようにエラーが表示されます。
+
+# これがgraphql-scalarsをそのまま使った際の限界です。
 
 # EmailAddress - schema.gql, data/Query.json, Apollo Studio
 #   override in index.ts, and return 10 -> error https://github.com/richardimaoka/tutorial-graphql-scalars/commit/5edea8ed55cf85d145edfc3c36746a74378aa148
@@ -146,9 +171,7 @@ npm install graphql-scalars
     #     }
     #   }
     # }
-# argument type
-#   Apollo Studio, send wrong type - error
-#   Apollo Studio, send wrong format - error
+
 
 run generate
 npm start

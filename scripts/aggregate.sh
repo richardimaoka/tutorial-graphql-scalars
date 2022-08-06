@@ -3,7 +3,7 @@
 cd "$(dirname "$0")" || exit 
 cd ../ || exit # cd to the git repository root
 
-AGGREGATED=$(find steps/* -print0 | \
+AGGREGATED=$(find steps/2* -print0 | \
   xargs -0 cat | \
   grep -v '#!/bin/sh' | \
   grep -v '# REMOVE THIS' | \

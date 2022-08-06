@@ -2,7 +2,7 @@
 
 # ## テンプレートのセットアップ
 
-# 下図のように 2 つのターミナルを使います。まずは 1 つ目ターミナルを立ち上げて、テンプレートのセットアップから GraphQL Codegen の実行までを行いましょう。
+# 下図のように 3 つのターミナルを使います。まずは 1 つ目ターミナルを立ち上げて、テンプレートのセットアップから GraphQL Codegen の実行までを行いましょう。
 
 #![アートボード 2.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/75738/7e11f3d9-5947-276f-2860-52e8a96f154e.png)
 
@@ -13,30 +13,30 @@ mkdir server
 # shellcheck disable=SC2164 # REMOVE THIS IN aggregate.sh
 cd server
 
-# node.js setup
+# # node.js setup
 npm init -y
 echo "node_modules" > .gitignore
 
-# install and initialize typescript
+# # install and initialize typescript
 npm install --save-dev typescript
 npx tsc --init
 
-# ts-node-dev: watch and restart a TypeScript server
+# # ts-node-dev: watch and restart a TypeScript server
 npm install --save-dev ts-node-dev
 npm set-script start "ts-node-dev --respawn src/index.ts"
 
-# apollo server
+# # apollo server
 npm install apollo-server graphql
 
-# install and setup graphql-codegen
+# # install and setup graphql-codegen
 npm install -D @graphql-codegen/cli # @2.10.0
-# ここで npx graphql-code-generator init を行ってもよいが、そうすると対話モードに入って手入力が増えるのと、
-# 結局は npx graphql-code-generator init で生成されたconfig.ymlを上書き更新することになるので、以下はnpm installのみ行って config.ymlは後ほど作成
+# # ここで npx graphql-code-generator init を行ってもよいが、そうすると対話モードに入って手入力が増えるのと、
+# # 結局は npx graphql-code-generator init で生成されたconfig.ymlを上書き更新することになるので、以下はnpm installのみ行って config.ymlは後ほど作成
 npm install --save-dev  @graphql-codegen/typescript @graphql-codegen/typescript-resolvers
 npm set-script generate "graphql-codegen --config codegen.yml --watch ./schema.gql" # update generate script
 
 
-# copy files
+# # copy files
 mkdir src
 mkdir data
 curl https://raw.githubusercontent.com/richardimaoka/tutorial-apollo-server-setup/main/server/codegen.yml > codegen.yml
