@@ -21,7 +21,7 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
-  EmailAddress: any;
+  EmailAddress: string;
 };
 
 export type Person = {
