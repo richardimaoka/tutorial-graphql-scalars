@@ -1,6 +1,14 @@
 {
   "me": {
-    "emailAddress": "jason.summerwinnter@gmail.com",
-    "name": "Jason Summerwinter"
+    "name": "Jason Summerwinter",
+    "birthDate": "1992-12-03T10:15:30Z",
+    "ageInYears": 30,
+    "heightInInches": 180,
+    "minimumHourlyRate": 3000,
+    "currentlyActiveProjects": 3,
+    "emailAddress": "jason.summerwinter@gmail.com",
+    "homePage": "https://json.summer.winter.com",
+    "phoneNumber": "+12312345678",
+    "homePostalCode": "010-0000"
   }
 }
