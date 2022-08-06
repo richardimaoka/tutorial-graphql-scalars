@@ -2,10 +2,16 @@ import { ApolloServer, gql } from "apollo-server";
 import * as fs from "fs";
 import { CountryCodeResolver, EmailAddressResolver } from "graphql-scalars";
 import { Query, Resolvers } from "./generated/graphql";
+import { CountryString } from "./myTypes";
 
 const typeDefs = gql`
   ${fs.readFileSync(__dirname.concat("/../schema.gql"), "utf8")}
 `;
+
+// process `country`, guaranteed to be a valid Country Code
+const processCounteryDeepInsideServer = (country: CountryString) => {
+  console.log(country);
+};
 
 interface LoadingDataContext {
   Query: Query;
@@ -18,7 +24,7 @@ const resolvers: Resolvers<LoadingDataContext> = {
     },
     search(_parent, args, context, _info) {
       const countryString = args.country;
-      console.log(countryString);
+      processCounteryDeepInsideServer(countryString);
       return context.Query.search;
     },
   },
