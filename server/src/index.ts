@@ -1,12 +1,24 @@
-import { EmailAddressString, isEmailAddressString } from "./myTypes";
 import { ApolloServer, gql } from "apollo-server";
 import * as fs from "fs";
 import { CountryCodeResolver, EmailAddressResolver } from "graphql-scalars";
 import { Query, Resolvers } from "./generated/graphql";
+import { EmailAddressString, isEmailAddressString } from "./myTypes";
 
 const typeDefs = gql`
   ${fs.readFileSync(__dirname.concat("/../schema.gql"), "utf8")}
 `;
+
+const loadEmailDeepInsideServer = (): EmailAddressString => {
+  // somewhere like database, deep inside the server side...
+  const valueFromDatabase = "jason.summerwinnter@gmail.com";
+  if (isEmailAddressString(valueFromDatabase)) {
+    return valueFromDatabase;
+  } else {
+    throw new TypeError(
+      `value from database = ${valueFromDatabase} is not a valid email address`
+    );
+  }
+};
 
 interface LoadingDataContext {
   Query: Query;
@@ -25,11 +37,13 @@ const resolvers: Resolvers<LoadingDataContext> = {
     name(parent, _args, _context, _info) {
       return parent.name;
     },
-    emailAddress(parent, _args, _context, _info) {
-      const email = "jason.summerwinnter@gmail.com";
-      if (isEmailAddressString(email)) {
+    emailAddress(_parent, _args, _context, _info) {
+      try {
+        const email = loadEmailDeepInsideServer();
         return email;
-      } else {
+      } catch (error) {
+        //the server log only, not exposing the internal error detail to the API caller
+        console.log(error);
         throw new Error(
           "Internal Error occurred: could not retrieve emailAddress"
         );
