@@ -25,7 +25,7 @@ const resolvers: Resolvers<LoadingDataContext> = {
       return parent.name;
     },
     emailAddress(parent, _args, _context, _info) {
-      return parent.emailAddress;
+      return "jason.summerwinnter@gmail.com";
     },
     country(parent, _args, _context, _info) {
       return parent.country;
