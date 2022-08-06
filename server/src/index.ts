@@ -22,7 +22,7 @@ const resolvers: Resolvers<LoadingDataContext> = {
       return parent.name;
     },
     emailAddress(parent, _args, _context, _info) {
-      return 10;
+      return "jason.summerwinnter@@@@gmail.com";
     },
   },
   EmailAddress: EmailAddressResolver,
