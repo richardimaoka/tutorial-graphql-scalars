@@ -6,10 +6,12 @@ generates:
     plugins:
       - "typescript"
       - "typescript-resolvers"
+      - "add":
+          content: "import * as myTypes from '../myTypes'"
     config:
       avoidOptionals: true
       scalars:
-        EmailAddress: string
+        EmailAddress: myTypes.EmailAddressString
 hooks:
   afterOneFileWrite:
     - npx prettier --write

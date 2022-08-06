@@ -3,6 +3,7 @@ import {
   GraphQLScalarType,
   GraphQLScalarTypeConfig,
 } from "graphql";
+import * as myTypes from "../myTypes";
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = {
@@ -22,7 +23,7 @@ export type Scalars = {
   Int: number;
   Float: number;
   CountryCode: any;
-  EmailAddress: string;
+  EmailAddress: myTypes.EmailAddressString;
 };
 
 export type Person = {
