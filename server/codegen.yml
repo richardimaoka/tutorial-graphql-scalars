@@ -12,6 +12,7 @@ generates:
       avoidOptionals: true
       scalars:
         EmailAddress: myTypes.EmailAddressString
+        CountryCode: myTypes.CountryString
 hooks:
   afterOneFileWrite:
     - npx prettier --write
