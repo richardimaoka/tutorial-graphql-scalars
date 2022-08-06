@@ -1,0 +1,42 @@
+commit 3f8aeceb5e5fb331de323adee0c679312d2c5054
+Author: Richard Imaoka <richard.e.imaoka@gmail.com>
+Date:   Sat Aug 6 09:29:58 2022 +0900
+
+    update data/Query.json
+
+diff --git a/server/data/Query.json b/server/data/Query.json
+index b474129..ea45354 100644
+--- a/server/data/Query.json
++++ b/server/data/Query.json
+@@ -1,6 +1,29 @@
+ {
+   "me": {
+     "emailAddress": "jason.summerwinnter@gmail.com",
+-    "name": "Jason Summerwinter"
+-  }
++    "name": "Jason Summerwinter",
++    "country": "JP"
++  },
++  "search": [
++    {
++      "emailAddress": "jason.fallspring@gmail.com",
++      "name": "Jason FallSpring",
++      "country": "JP"
++    },
++    {
++      "emailAddress": "kate.heartspadediamond@gmail.com",
++      "name": "Kate HeartSpadeDiamond",
++      "country": "JP"
++    },
++    {
++      "emailAddress": "yosuke.kishidamax@gmail.com",
++      "name": "Yosuke KishidaMax",
++      "country": "JP"
++    },
++    {
++      "emailAddress": "bob.BobbDobb@gmail.com",
++      "name": "Bob BobbDobb",
++      "country": "JP"
++    }
++  ]
+ }

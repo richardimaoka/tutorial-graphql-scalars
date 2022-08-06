@@ -1,0 +1,19 @@
+commit dfeb0f24da77eecdee98516229672b192f04f2d4
+Author: Richard Imaoka <richard.e.imaoka@gmail.com>
+Date:   Sat Aug 6 11:35:53 2022 +0900
+
+    wrong format email is validated near the database
+
+diff --git a/server/src/index.ts b/server/src/index.ts
+index 0cf062f..4d7df9e 100644
+--- a/server/src/index.ts
++++ b/server/src/index.ts
+@@ -10,7 +10,7 @@ const typeDefs = gql`
+ 
+ const loadEmailDeepInsideServer = (): EmailAddressString => {
+   // somewhere like database, deep inside the server side...
+-  const valueFromDatabase = "jason.summerwinnter@gmail.com";
++  const valueFromDatabase = "jason.summerwinnter@@@@gmail.com";
+   if (isEmailAddressString(valueFromDatabase)) {
+     return valueFromDatabase;
+   } else {

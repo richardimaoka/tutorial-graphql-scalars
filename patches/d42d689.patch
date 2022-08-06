@@ -1,0 +1,67 @@
+commit d42d6895b391b229a87a6b4a66416c0e97b85097
+Author: Richard Imaoka <richard.e.imaoka@gmail.com>
+Date:   Sat Aug 6 09:49:23 2022 +0900
+
+    npm install --save-dev @graphql-codegen/add
+
+diff --git a/server/package-lock.json b/server/package-lock.json
+index d471f4c..3029ec6 100644
+--- a/server/package-lock.json
++++ b/server/package-lock.json
+@@ -14,6 +14,7 @@
+         "graphql-scalars": "^1.17.0"
+       },
+       "devDependencies": {
++        "@graphql-codegen/add": "^3.2.0",
+         "@graphql-codegen/cli": "^2.11.3",
+         "@graphql-codegen/typescript": "^2.7.2",
+         "@graphql-codegen/typescript-resolvers": "^2.7.2",
+@@ -1245,6 +1246,19 @@
+         "node": ">=12"
+       }
+     },
++    "node_modules/@graphql-codegen/add": {
++      "version": "3.2.0",
++      "resolved": "https://registry.npmjs.org/@graphql-codegen/add/-/add-3.2.0.tgz",
++      "integrity": "sha512-8hyr5XvTDGnpiT4nH2yH8PP4SWtUEIUdkFaZbkpkFkU0Ud9dplvSviOCdxdArffZ1FHy0XYLTMa2it+UJOtszg==",
++      "dev": true,
++      "dependencies": {
++        "@graphql-codegen/plugin-helpers": "^2.5.0",
++        "tslib": "~2.4.0"
++      },
++      "peerDependencies": {
++        "graphql": "^0.8.0 || ^0.9.0 || ^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0"
++      }
++    },
+     "node_modules/@graphql-codegen/cli": {
+       "version": "2.11.3",
+       "resolved": "https://registry.npmjs.org/@graphql-codegen/cli/-/cli-2.11.3.tgz",
+@@ -7330,6 +7344,16 @@
+         "@jridgewell/trace-mapping": "0.3.9"
+       }
+     },
++    "@graphql-codegen/add": {
++      "version": "3.2.0",
++      "resolved": "https://registry.npmjs.org/@graphql-codegen/add/-/add-3.2.0.tgz",
++      "integrity": "sha512-8hyr5XvTDGnpiT4nH2yH8PP4SWtUEIUdkFaZbkpkFkU0Ud9dplvSviOCdxdArffZ1FHy0XYLTMa2it+UJOtszg==",
++      "dev": true,
++      "requires": {
++        "@graphql-codegen/plugin-helpers": "^2.5.0",
++        "tslib": "~2.4.0"
++      }
++    },
+     "@graphql-codegen/cli": {
+       "version": "2.11.3",
+       "resolved": "https://registry.npmjs.org/@graphql-codegen/cli/-/cli-2.11.3.tgz",
+diff --git a/server/package.json b/server/package.json
+index d2db318..b35eb9e 100644
+--- a/server/package.json
++++ b/server/package.json
+@@ -12,6 +12,7 @@
+   "author": "",
+   "license": "ISC",
+   "devDependencies": {
++    "@graphql-codegen/add": "^3.2.0",
+     "@graphql-codegen/cli": "^2.11.3",
+     "@graphql-codegen/typescript": "^2.7.2",
+     "@graphql-codegen/typescript-resolvers": "^2.7.2",

@@ -1,0 +1,39 @@
+commit e923797c392e5870c8b0acb6a6cd82d12ebfd7f5
+Author: Richard Imaoka <richard.e.imaoka@gmail.com>
+Date:   Sat Aug 6 17:50:25 2022 +0900
+
+    process args.country inside search
+
+diff --git a/server/src/index.ts b/server/src/index.ts
+index 67fff76..0dceb89 100644
+--- a/server/src/index.ts
++++ b/server/src/index.ts
+@@ -2,11 +2,17 @@ import { ApolloServer, gql } from "apollo-server";
+ import * as fs from "fs";
+ import { CountryCodeResolver, EmailAddressResolver } from "graphql-scalars";
+ import { Query, Resolvers } from "./generated/graphql";
++import { CountryString } from "./myTypes";
+ 
+ const typeDefs = gql`
+   ${fs.readFileSync(__dirname.concat("/../schema.gql"), "utf8")}
+ `;
+ 
++// process `country`, guaranteed to be a valid Country Code
++const processCounteryDeepInsideServer = (country: CountryString) => {
++  console.log(country);
++};
++
+ interface LoadingDataContext {
+   Query: Query;
+ }
+@@ -16,7 +22,9 @@ const resolvers: Resolvers<LoadingDataContext> = {
+     me(_parent, _args, context, _info) {
+       return context.Query.me;
+     },
+-    search(_parent, _args, context, _info) {
++    search(_parent, args, context, _info) {
++      const countryString = args.country;
++      processCounteryDeepInsideServer(countryString);
+       return context.Query.search;
+     },
+   },
