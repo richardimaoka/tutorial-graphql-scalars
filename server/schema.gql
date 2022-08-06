@@ -1,24 +1,8 @@
-scalar DateTime
-scalar PositiveInt
-scalar PositiveFloat
-scalar NonNegativeFloat
-scalar NonNegativeInt
 scalar EmailAddress
-scalar URL
-scalar PhoneNumber
-scalar PostalCode
 
 type Person {
-  name: String
-  birthDate: DateTime
-  ageInYears: PositiveInt
-  heightInInches: PositiveFloat
-  minimumHourlyRate: NonNegativeFloat
-  currentlyActiveProjects: NonNegativeInt
   emailAddress: EmailAddress
-  homePage: URL
-  phoneNumber: PhoneNumber
-  homePostalCode: PostalCode
+  name: String
 }
 
 type Query {
