@@ -15,6 +15,9 @@ export type MakeOptional<T, K extends keyof T> = Omit<T, K> & {
 export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & {
   [SubKey in K]: Maybe<T[SubKey]>;
 };
+export type RequireFields<T, K extends keyof T> = Omit<T, K> & {
+  [P in K]-?: NonNullable<T[P]>;
+};
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string;
@@ -40,7 +43,7 @@ export type Query = {
 };
 
 export type QuerySearchArgs = {
-  country: InputMaybe<Scalars["CountryCode"]>;
+  country: Scalars["CountryCode"];
 };
 
 export type ResolverTypeWrapper<T> = Promise<T> | T;
@@ -205,7 +208,7 @@ export type QueryResolvers<
     Maybe<Array<Maybe<ResolversTypes["Person"]>>>,
     ParentType,
     ContextType,
-    Partial<QuerySearchArgs>
+    RequireFields<QuerySearchArgs, "country">
   >;
 };
 

@@ -9,5 +9,5 @@ type Person {
 
 type Query {
   me: Person
-  search(country: CountryCode): [Person]
+  search(country: CountryCode!): [Person]
 }
