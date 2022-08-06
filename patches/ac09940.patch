@@ -1,0 +1,63 @@
+commit ac09940c7534375c0eac1160f83bc9c1506be0c7
+Author: Richard Imaoka <richard.e.imaoka@gmail.com>
+Date:   Sat Jul 30 19:01:13 2022 +0900
+
+    npm install --save-dev typescript
+
+diff --git a/app/package-lock.json b/app/package-lock.json
+new file mode 100644
+index 0000000..8fd1c19
+--- /dev/null
++++ b/app/package-lock.json
+@@ -0,0 +1,37 @@
++{
++  "name": "app",
++  "version": "1.0.0",
++  "lockfileVersion": 2,
++  "requires": true,
++  "packages": {
++    "": {
++      "name": "app",
++      "version": "1.0.0",
++      "license": "ISC",
++      "devDependencies": {
++        "typescript": "^4.7.4"
++      }
++    },
++    "node_modules/typescript": {
++      "version": "4.7.4",
++      "resolved": "https://registry.npmjs.org/typescript/-/typescript-4.7.4.tgz",
++      "integrity": "sha512-C0WQT0gezHuw6AdY1M2jxUO83Rjf0HP7Sk1DtXj6j1EwkQNZrHAg2XPWlq62oqEhYvONq5pkC2Y9oPljWToLmQ==",
++      "dev": true,
++      "bin": {
++        "tsc": "bin/tsc",
++        "tsserver": "bin/tsserver"
++      },
++      "engines": {
++        "node": ">=4.2.0"
++      }
++    }
++  },
++  "dependencies": {
++    "typescript": {
++      "version": "4.7.4",
++      "resolved": "https://registry.npmjs.org/typescript/-/typescript-4.7.4.tgz",
++      "integrity": "sha512-C0WQT0gezHuw6AdY1M2jxUO83Rjf0HP7Sk1DtXj6j1EwkQNZrHAg2XPWlq62oqEhYvONq5pkC2Y9oPljWToLmQ==",
++      "dev": true
++    }
++  }
++}
+diff --git a/app/package.json b/app/package.json
+index 54977d8..0cf9c8f 100644
+--- a/app/package.json
++++ b/app/package.json
+@@ -8,5 +8,8 @@
+   },
+   "keywords": [],
+   "author": "",
+-  "license": "ISC"
++  "license": "ISC",
++  "devDependencies": {
++    "typescript": "^4.7.4"
++  }
+ }

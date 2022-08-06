@@ -1,0 +1,90 @@
+commit fe3a1c3a0bcd3f473f94b81c084c8ced7eca95a4
+Author: Richard Imaoka <richard.e.imaoka@gmail.com>
+Date:   Mon Jul 25 22:11:30 2022 +0900
+
+    steps overall
+
+diff --git a/steps/0.md b/steps/0.md
+new file mode 100644
+index 0000000..3ef4501
+--- /dev/null
++++ b/steps/0.md
+@@ -0,0 +1,14 @@
++## 0. はじめに
++
++### 事前準備
++
++node と npm がインストール済みであることを確認して下さい。
++
++### git レポジトリのクローン
++
++:large_orange_diamond: Action: ターミナルで以下のコマンドを実行してください
++
++```terminal
++git clone https://github.com/richardimaoka/tutorial-react-prismjs.git
++cd tutorial-react-prismjs.git
++```
+diff --git a/steps/1-setup-apollo-server.sh b/steps/1-setup-apollo-server.sh
+new file mode 100755
+index 0000000..03b4fb9
+--- /dev/null
++++ b/steps/1-setup-apollo-server.sh
+@@ -0,0 +1,24 @@
++#!/bin/sh
++
++cd "$(dirname "$0")" || exit # REMOVE THIS IN aggregate.sh
++cd ../ || exit               # REMOVE THIS IN aggregate.sh - cd to the git repository root
++
++
++npm init -y
++npm install --save-dev typescript
++npx tsc --init
++npm install --save-dev ts-node-dev
++npm set-script start "ts-node-dev --respawn src/index.ts"
++npm install apollo-server graphql
++
++npm install -D @graphql-codegen/cli
++npx graphql-codegen-generator init
++# ...answers
++npm install
++
++git apply # bare bone src/index.ts, fold to show the file content
++git apply # bare bone schema.gql, fold to show the file content
++npm generate
++npm start
++
++# query from apollo studio
+diff --git a/steps/2-scalar.sh b/steps/2-scalar.sh
+new file mode 100755
+index 0000000..e72862d
+--- /dev/null
++++ b/steps/2-scalar.sh
+@@ -0,0 +1,14 @@
++#!/bin/sh
++
++cd "$(dirname "$0")" || exit # REMOVE THIS IN aggregate.sh
++cd ../ || exit               # REMOVE THIS IN aggregate.sh - cd to the git repository root
++
++npm install graphql-scalars
++
++git apply # EmailAddress in schema, resolver
++# query in apollo studio, errors
++
++git apply # argument type in schema, resolver
++# query in apollo studio, errors
++
++# if you use a text schema definition, you can't use ScalrNameTypeDefinition
+diff --git a/steps/3-optional.sh b/steps/3-optional.sh
+new file mode 100755
+index 0000000..c8bdb59
+--- /dev/null
++++ b/steps/3-optional.sh
+@@ -0,0 +1,8 @@
++#!/bin/sh
++
++cd "$(dirname "$0")" || exit # REMOVE THIS IN aggregate.sh
++cd ../ || exit               # REMOVE THIS IN aggregate.sh - cd to the git repository root
++
++git apply # restore the EmailAddress information from the string type in JavaScript
++
++# if you use a text schema definition, you can't use ScalrNameTypeDefinition

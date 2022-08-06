@@ -1,0 +1,19 @@
+commit abca964c84c35b05ee5f247476dd227097f0d43c
+Author: Richard Imaoka <richard.e.imaoka@gmail.com>
+Date:   Sat Jul 30 20:10:23 2022 +0900
+
+    npm set-script generate "graphql-codegen --config codegen.yml --watch ./schema.gql"
+
+diff --git a/app/package.json b/app/package.json
+index e8d4b9e..6108d80 100644
+--- a/app/package.json
++++ b/app/package.json
+@@ -6,7 +6,7 @@
+   "scripts": {
+     "test": "echo \"Error: no test specified\" && exit 1",
+     "start": "ts-node-dev --respawn src/index.ts",
+-    "generate": "graphql-codegen --config codegen.yml"
++    "generate": "graphql-codegen --config codegen.yml --watch ./schema.gql"
+   },
+   "keywords": [],
+   "author": "",

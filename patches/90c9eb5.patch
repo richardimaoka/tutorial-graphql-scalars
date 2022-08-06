@@ -1,0 +1,70 @@
+commit 90c9eb52022ecd8eaf8374bf0eb28e26335746e4
+Author: Richard Imaoka <richard.e.imaoka@gmail.com>
+Date:   Sat Jul 30 18:33:28 2022 +0900
+
+    steps =================================================
+
+diff --git a/steps/1-setup-apollo-server.sh b/steps/1-setup-apollo-server.sh
+index 03b4fb9..8a10434 100755
+--- a/steps/1-setup-apollo-server.sh
++++ b/steps/1-setup-apollo-server.sh
+@@ -4,21 +4,28 @@ cd "$(dirname "$0")" || exit # REMOVE THIS IN aggregate.sh
+ cd ../ || exit               # REMOVE THIS IN aggregate.sh - cd to the git repository root
+ 
+ 
++# new terminal
+ npm init -y
++echo "node_modules" > .gitignore
+ npm install --save-dev typescript
+ npx tsc --init
+ npm install --save-dev ts-node-dev
+ npm set-script start "ts-node-dev --respawn src/index.ts"
+ npm install apollo-server graphql
++git apply # bare bone src/index.ts, fold to show the file content
++git apply # bare bone schema.gql, fold to show the file content
++npm start
+ 
++# new terminal
+ npm install -D @graphql-codegen/cli
+ npx graphql-codegen-generator init
+-# ...answers
++# codgen interactive questions & answers
+ npm install
+-
+-git apply # bare bone src/index.ts, fold to show the file content
+-git apply # bare bone schema.gql, fold to show the file content
++npm set-script start "...."
+ npm generate
+-npm start
++git apply # use generated types in src/index.ts
++
++git apply # use data.json
++git apply # define context type
+ 
+ # query from apollo studio
+diff --git a/steps/2-scalar.sh b/steps/2-scalar.sh
+index e72862d..d43b197 100755
+--- a/steps/2-scalar.sh
++++ b/steps/2-scalar.sh
+@@ -6,9 +6,9 @@ cd ../ || exit               # REMOVE THIS IN aggregate.sh - cd to the git repos
+ npm install graphql-scalars
+ 
+ git apply # EmailAddress in schema, resolver
+-# query in apollo studio, errors
++# query in apollo studio, error due to wrong return format
+ 
+ git apply # argument type in schema, resolver
+ # query in apollo studio, errors
+ 
+-# if you use a text schema definition, you can't use ScalrNameTypeDefinition
++# if you use .gql schema file, you can't use ScalrNameTypeDefinition
+diff --git a/steps/3-optional.sh b/steps/3-optional.sh
+index c8bdb59..31db0b6 100755
+--- a/steps/3-optional.sh
++++ b/steps/3-optional.sh
+@@ -6,3 +6,5 @@ cd ../ || exit               # REMOVE THIS IN aggregate.sh - cd to the git repos
+ git apply # restore the EmailAddress information from the string type in JavaScript
+ 
+ # if you use a text schema definition, you can't use ScalrNameTypeDefinition
++
++# many more scalar types

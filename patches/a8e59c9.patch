@@ -1,0 +1,144 @@
+commit a8e59c94733723c7fccfb65122a8909c67b6bcb0
+Author: Richard Imaoka <richard.e.imaoka@gmail.com>
+Date:   Thu Aug 4 05:12:03 2022 +0900
+
+    move source code to answer
+
+diff --git a/server/.gitignore b/answer/server/.gitignore
+similarity index 100%
+rename from server/.gitignore
+rename to answer/server/.gitignore
+diff --git a/server/codegen.yml b/answer/server/codegen.yml
+similarity index 100%
+rename from server/codegen.yml
+rename to answer/server/codegen.yml
+diff --git a/server/data/Query.json b/answer/server/data/Query.json
+similarity index 100%
+rename from server/data/Query.json
+rename to answer/server/data/Query.json
+diff --git a/server/package-lock.json b/answer/server/package-lock.json
+similarity index 100%
+rename from server/package-lock.json
+rename to answer/server/package-lock.json
+diff --git a/server/package.json b/answer/server/package.json
+similarity index 100%
+rename from server/package.json
+rename to answer/server/package.json
+diff --git a/server/schema.gql b/answer/server/schema.gql
+similarity index 100%
+rename from server/schema.gql
+rename to answer/server/schema.gql
+diff --git a/server/src/generated/graphql.ts b/answer/server/src/generated/graphql.ts
+similarity index 100%
+rename from server/src/generated/graphql.ts
+rename to answer/server/src/generated/graphql.ts
+diff --git a/server/src/index.ts b/answer/server/src/index.ts
+similarity index 100%
+rename from server/src/index.ts
+rename to answer/server/src/index.ts
+diff --git a/server/tsconfig.json b/answer/server/tsconfig.json
+similarity index 100%
+rename from server/tsconfig.json
+rename to answer/server/tsconfig.json
+diff --git a/steps/2-setup-codegen.sh b/steps/2-setup-codegen.sh
+index c6e8330..92731ec 100644
+--- a/steps/2-setup-codegen.sh
++++ b/steps/2-setup-codegen.sh
+@@ -3,7 +3,96 @@
+ cd "$(dirname "$0")" || exit # REMOVE THIS IN aggregate.sh
+ cd ../ || exit               # REMOVE THIS IN aggregate.sh - cd to the git repository root
+ 
+-# npm install graphql-scalars
++# :large_orange_diamond: Action: 新しいターミナルを立ち上げてください。
++
++# ```:terminal
++npm install graphql-scalars
++# ```
++
++# :large_orange_diamond: Action: 以下のとおり `server/schema.gql` を更新してください。
++
++# ```graphql:server/schema.gql
++# scalar EmailAddress
++#
++# type Person {
++#   emailAddress: EmailAddress
++#   name: String
++# }
++#
++# type Query {
++#   me: Person
++# }
++# ```
++
++# :large_orange_diamond: Action: 以下のとおり `server/src/index.ts` を更新してください。
++# ```ts:server/src/index.ts
++# import { ApolloServer, gql } from "apollo-server";
++# import * as fs from "fs";
++# import {
++#   EmailAddressResolver,
++#   TimestampResolver,
++#   URLResolver,
++# } from "graphql-scalars";
++# import { EmailAddress } from "graphql-scalars/mocks";
++# import { Query, Resolvers } from "./generated/graphql";
++#
++# const typeDefs = gql`
++#   ${fs.readFileSync(__dirname.concat("/../schema.gql"), "utf8")}
++# `;
++#
++# interface LoadingDataContext {
++#   Query: Query;
++# }
++#
++# const resolvers: Resolvers<LoadingDataContext> = {
++#   Query: {
++#     me(parent, args, context, info) {
++#       return null;
++#     },
++#   },
++#   Person: {
++#     name(parent, args, context, info) {
++#       return parent.name;
++#     },
++#     emailAddress(parent, args, context, info) {
++#       return parent.emailAddress;
++#     },
++#   },
++#   EmailAddress: EmailAddressResolver,
++# };
++#
++# const readJsonFile = async (relativeFileName: string): Promise<any> => {
++#   const jsonDataFile = __dirname.concat(relativeFileName);
++#   const fileContent = await fs.promises.readFile(jsonDataFile, "utf8");
++#   const jsonData = JSON.parse(fileContent);
++#   return jsonData;
++# };
++#
++# const server = new ApolloServer({
++#   typeDefs,
++#   resolvers,
++#   context: async ({ req }: any) => {
++#     try {
++#       const queryData: LoadingDataContext = await readJsonFile(
++#         "/../data/Query.json"
++#       );
++#       return { Query: queryData };
++#     } catch (err) {
++#       console.log("***ERROR OCURRED***");
++#       console.log(err);
++#       throw new Error("internal error happened!!");
++#     }
++#   },
++# });
++#
++# // The  method launches a web server.
++# server.listen().then(({ url }) => {
++#   console.log();
++# });
++#```
++
++# :large_orange_diamond: Action: 以下のとおり `server/data/Query.json` を更新してください。
++
+ # EmailAddress - schema.gql, data/Query.json, Apollo Studio
+ #   override in index.ts, and return 10 -> error https://github.com/richardimaoka/tutorial-graphql-scalars/commit/5edea8ed55cf85d145edfc3c36746a74378aa148
+ #   config.yml to set string -> static type checking! https://github.com/richardimaoka/tutorial-graphql-scalars/commit/5edea8ed55cf85d145edfc3c36746a74378aa148

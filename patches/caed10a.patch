@@ -1,0 +1,24 @@
+commit caed10a8b7c896b3453ededd814a5a452b5163bd
+Author: Richard Imaoka <richard.e.imaoka@gmail.com>
+Date:   Sat Jul 30 18:54:43 2022 +0900
+
+    npm init -y
+
+diff --git a/app/package.json b/app/package.json
+new file mode 100644
+index 0000000..54977d8
+--- /dev/null
++++ b/app/package.json
+@@ -0,0 +1,12 @@
++{
++  "name": "app",
++  "version": "1.0.0",
++  "description": "",
++  "main": "index.js",
++  "scripts": {
++    "test": "echo \"Error: no test specified\" && exit 1"
++  },
++  "keywords": [],
++  "author": "",
++  "license": "ISC"
++}

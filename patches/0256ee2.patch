@@ -1,0 +1,13 @@
+commit 0256ee21af71fde493b86a9523f0b003cec18a79
+Author: Richard Imaoka <richard.e.imaoka@gmail.com>
+Date:   Sat Jul 30 18:54:17 2022 +0900
+
+    echo "node_modules" > .gitignore
+
+diff --git a/app/.gitignore b/app/.gitignore
+new file mode 100644
+index 0000000..3c3629e
+--- /dev/null
++++ b/app/.gitignore
+@@ -0,0 +1 @@
++node_modules

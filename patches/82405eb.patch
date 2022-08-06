@@ -1,0 +1,45 @@
+commit 82405eb040a7b5761b69c4a9c0e23af3794f9d01
+Author: Richard Imaoka <richard.e.imaoka@gmail.com>
+Date:   Sat Jul 30 19:58:20 2022 +0900
+
+    npx graphql-code-generator init
+
+diff --git a/app/codegen.yml b/app/codegen.yml
+new file mode 100644
+index 0000000..956be73
+--- /dev/null
++++ b/app/codegen.yml
+@@ -0,0 +1,8 @@
++overwrite: true
++schema: "schema.gql"
++documents: null
++generates:
++  src/generated/graphql.ts:
++    plugins:
++      - "typescript"
++      - "typescript-resolvers"
+diff --git a/app/package.json b/app/package.json
+index 90be20f..e8d4b9e 100644
+--- a/app/package.json
++++ b/app/package.json
+@@ -5,7 +5,8 @@
+   "main": "index.js",
+   "scripts": {
+     "test": "echo \"Error: no test specified\" && exit 1",
+-    "start": "ts-node-dev --respawn src/index.ts"
++    "start": "ts-node-dev --respawn src/index.ts",
++    "generate": "graphql-codegen --config codegen.yml"
+   },
+   "keywords": [],
+   "author": "",
+@@ -13,7 +14,9 @@
+   "devDependencies": {
+     "@graphql-codegen/cli": "2.10",
+     "ts-node-dev": "^2.0.0",
+-    "typescript": "^4.7.4"
++    "typescript": "^4.7.4",
++    "@graphql-codegen/typescript": "2.7.2",
++    "@graphql-codegen/typescript-resolvers": "2.7.2"
+   },
+   "dependencies": {
+     "apollo-server": "^3.10.0",
