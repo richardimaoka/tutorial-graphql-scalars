@@ -10,7 +10,7 @@ const typeDefs = gql`
 
 const loadEmailDeepInsideServer = (): EmailAddressString => {
   // somewhere like database, deep inside the server side...
-  const valueFromDatabase = "jason.summerwinnter@gmail.com";
+  const valueFromDatabase = "jason.summerwinnter@@@@gmail.com";
   if (isEmailAddressString(valueFromDatabase)) {
     return valueFromDatabase;
   } else {
