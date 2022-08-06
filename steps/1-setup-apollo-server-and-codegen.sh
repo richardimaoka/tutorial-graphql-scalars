@@ -4,9 +4,9 @@
 
 # 下図のように 3 つのターミナルを使います。まずは 1 つ目ターミナルを立ち上げて、テンプレートのセットアップから GraphQL Codegen の実行までを行いましょう。
 
-#![アートボード 2.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/75738/7e11f3d9-5947-276f-2860-52e8a96f154e.png)
+# ![アートボード 2.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/75738/7e11f3d9-5947-276f-2860-52e8a96f154e.png)
 
-#:large_orange_diamond: Action: 以下のコマンドを入力してください。一気に全部コピー & ペーストして実行して構いません。
+# :large_orange_diamond: Action: 以下のコマンドを入力してください。一気に全部コピー & ペーストして実行して構いません。
 
 # ```terminal
 mkdir server
