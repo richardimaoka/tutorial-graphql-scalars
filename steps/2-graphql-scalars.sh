@@ -3,7 +3,7 @@
 cd "$(dirname "$0")" || exit # REMOVE THIS IN aggregate.sh
 cd ../ || exit               # REMOVE THIS IN aggregate.sh - cd to the git repository root
 
-# ## graphql-scalarsをfield型に使った際の動作確認
+# ## 2. graphql-scalarsをfield型に使った際の動作確認
 
 # :large_orange_diamond: Action: 新しいターミナルを立ち上げてください。
 
