@@ -3,7 +3,7 @@
 cd "$(dirname "$0")" || exit 
 cd ../ || exit # cd to the git repository root
 
-git log --oneline --reverse | \
+git log --oneline --reverse 66e0095.. | \
    sed -r 's/(^\w+\b)(.*)/git show --binary --patch \1 > patches\/\1.patch/'
 
 # if you want to start from a certain commit (e.g.) dc61691
