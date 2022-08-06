@@ -1,5 +1,6 @@
 import { ApolloServer, gql } from "apollo-server";
 import * as fs from "fs";
+import { EmailAddressResolver } from "graphql-scalars";
 import { Query, Resolvers } from "./generated/graphql";
 
 const typeDefs = gql`
@@ -12,24 +13,19 @@ interface LoadingDataContext {
 
 const resolvers: Resolvers<LoadingDataContext> = {
   Query: {
-    hello: async (_parent, _args, context, _info) => {
-      return context.Query.hello;
-    },
-    search: async (_parent, _args, context, _info) => {
-      return context.Query.search;
+    me(_parent, _args, context, _info) {
+      return context.Query.me;
     },
   },
-  Employee: {
-    name: async (parent, _args, _content, _info) => {
+  Person: {
+    name(parent, _args, _context, _info) {
       return parent.name;
     },
-    jobTitle: async (parent, _args, _content, _info) => {
-      return parent.jobTitle;
-    },
-    department: async (parent, _args, _content, _info) => {
-      return parent.department;
+    emailAddress(parent, _args, _context, _info) {
+      return parent.emailAddress;
     },
   },
+  EmailAddress: EmailAddressResolver,
 };
 
 const readJsonFile = async (relativeFileName: string): Promise<any> => {
