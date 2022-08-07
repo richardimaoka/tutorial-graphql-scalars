@@ -145,7 +145,7 @@ git apply patches/20f9644.patch # many custom scalars
 
 # </div></details>
 
-# <details><summary>Apollo Studio Explorerで確認</summary><div>
+# <details><summary>:white_check_mark: Result: Apollo Studio Explorerで確認</summary><div>
 
 
 # ---

@@ -3,28 +3,59 @@
 cd "$(dirname "$0")" || exit # REMOVE THIS IN aggregate.sh
 cd ../ || exit               # REMOVE THIS IN aggregate.sh - cd to the git repository root
 
-git apply # restore the EmailAddress information from the string type in JavaScript
 
-# if you use a text schema definition, you can't use ScalrNameTypeDefinition
+# ## 5. 
 
-# nested structure
-#   https://www.graphql-scalars.dev/docs/quick-start
-#   type Person {
-#     birthDate: DateTime
-#     ageInYears: PositiveInt
-#     heightInInches: PositiveFloat
-#     minimumHourlyRate: NonNegativeFloat
-#     currentlyActiveProjects: NonNegativeInt
-#     email: EmailAddress
-#     homePage: URL
-#     phoneNumber: PhoneNumber
-#     homePostalCode: PostalCode
-#    }
-#
-#    or types for realistic apps, like Reviewer and Store, etc
+# :large_orange_diamond: Action: 以下のコマンドを入力してください。
 
-# many more scalar types
+# ```shell
+npm install --save-dev @graphql-codegen/add 
+# ```
 
-# if you use .gql schema file, you can't use ScalrNameTypeDefinition
+# :large_orange_diamond: Action: 以下のコマンドを入力してください。
 
-npm
+# ```shell
+git apply patches/a827496.patch # EmailAddressString type
+# ```
+
+# :large_orange_diamond: Action: 以下のコマンドを入力してください。
+
+# ```shell
+git apply patches/3288f62.patch # Use EmailAddressString in codegen.yml
+# ```
+
+# :large_orange_diamond: Action: 以下のコマンドを入力してください。
+
+# ```shell
+git apply patches/04ba80e.patch # emailAddress does not allow plain string
+# ```
+
+# :large_orange_diamond: Action: 以下のコマンドを入力してください。
+
+# ```shell
+git apply patches/f97f618.patch # working
+# ```
+
+# :large_orange_diamond: Action: 以下のコマンドを入力してください。
+
+# ```shell
+git apply patches/dfeb0f2.patch # wrong format email is validated near the database
+# ```
+
+# :large_orange_diamond: Action: 以下のコマンドを入力してください。
+
+# ```shell
+git apply patches/9cf4c7d.patch # correct email format
+# ```
+
+# :large_orange_diamond: Action: 以下のコマンドを入力してください。
+
+# ```shell
+git apply patches/3c89889.patch # make search argument required
+# ```
+
+# :large_orange_diamond: Action: 以下のコマンドを入力してください。
+
+# ```shell
+git apply patches/061847a.patch # revert back index.ts
+# ```

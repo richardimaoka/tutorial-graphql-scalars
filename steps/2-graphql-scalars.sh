@@ -7,6 +7,10 @@ cd ../ || exit               # REMOVE THIS IN aggregate.sh - cd to the git repos
 
 # :large_orange_diamond: Action: 新しいターミナルを立ち上げてください。
 
+# ![アートボード 17.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/75738/128eb33f-2f1f-b06c-3267-3714bc867e52.png)
+
+# :large_orange_diamond: Action: 以下のコマンドを入力してください。
+
 # ```:terminal
 # shellcheck disable=SC2164 # REMOVE THIS IN aggregate.sh
 (cd server && npm install graphql-scalars)
@@ -141,7 +145,9 @@ git apply patches/8008a13.patch # return 10 in EmailAddress
 
 # </div></details>
 
-# 上記のソースコードは `return 10` としてnumber型の値を返しています。number型ではGraphQLのEmailAddress型の値を表現できないので、TypeScriptの型チェックでエラーを出してほしいところです。そこで以下の変更を行いましょう。
+# 上記のソースコードは `return 10` としてnumber型の値を返していますが、TypeScriptの型チェックはエラーを出力してくれません。
+
+# number型ではGraphQLのEmailAddress型の値を表現できないので、TypeScriptの型チェックでエラーを出してほしいところです。そこで以下の変更を行いましょう。
 
 # :large_orange_diamond: Action: 以下のコマンドを入力してください。
 
@@ -167,6 +173,7 @@ git apply patches/e60bb3a.patch # Update codegen.yml to set EmailAddress as stri
 
 # </div></details>
 
+
 # <details><summary>:white_check_mark: Result: config.ymlの変更に伴って、generated/graphql.ts が自動更新されます。</summary><div>
 
 # ```diff:server/src/generated/graphql.ts
@@ -189,18 +196,19 @@ git apply patches/e60bb3a.patch # Update codegen.yml to set EmailAddress as stri
 
 # <details><summary>:white_check_mark: Result: エラーの確認</summary><div>
 
+# ![2022-08-06_21h33_37.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/75738/11ef1c95-72e1-1ce8-446b-dd61a50cfb23.png)
+
+
 # ```terminal
 # Type 'number' is not assignable to type 'Maybe<ResolverTypeWrapper<string>> | Promise<Maybe<ResolverTypeWrapper<string>>>'
 # The expected type comes from property 'emailAddress' which is declared here on type 'PersonResolvers<LoadingDataContext, Person>'
 # ```
 
-# ![2022-08-06_21h33_37.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/75738/11ef1c95-72e1-1ce8-446b-dd61a50cfb23.png)
-
 # ---
 
 # </div></details>
 
-# しかし、上記のようなgraphql-scalarsが提供する機能のみを使った型チェックは:
+# TypeScriptの型チェックがうまく動作しましたが、上記のようなgraphql-scalarsが提供する機能のみを使った型チェックでは、以下のような限界があります:
 
 #   - stringが期待されるところでnumberをreturnするようなエラーを検出できます
 #   - しかし、stringではあるものの、EmailAddressの形式として間違っているものはエラーにはなりません
@@ -227,7 +235,7 @@ git apply patches/4efc7a3.patch # wrong email address format passes type checkin
 
 # </div></details>
 
-# こちらはランタイムエラーでのみ検出可能になります。
+# こちらはTypeScriptの型チェックではエラーを検出できず、ランタイムエラーでのみ検出可能になります。
 
 # <details><summary>:white_check_mark: Result: Apollo Studio Explorerでランタイムエラーを確認</summary><div>
 
@@ -238,7 +246,7 @@ git apply patches/4efc7a3.patch # wrong email address format passes type checkin
 # </div></details>
 
 # :::note info
-# 静的型チェックによってEmailAddressに変換できない形式のstringをエラーとして検出するには、このチュートリアルのあとの方で紹介する独自typeの定義を使ったテクニックが必要です。
+# TypeScriptの静的型チェックによってEmailAddressに変換できない形式のstringをエラーとして検出するには、このチュートリアルのあとの方で紹介する独自typeの定義を使ったテクニックが必要です。
 # :::
 
 # それでは、graphql-scalarsが提供する機能のみを使った場合の型チェックの動作がわかったので、emailAddressをQuery.jsonファイルから値を取得する形に戻します。

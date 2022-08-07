@@ -4,7 +4,7 @@
 
 # 下図のように 3 つのターミナルを使います。まずは 1 つ目ターミナルを立ち上げて、テンプレートのセットアップから GraphQL Codegen の実行までを行いましょう。
 
-# ![アートボード 2.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/75738/7e11f3d9-5947-276f-2860-52e8a96f154e.png)
+# ![アートボード 15.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/75738/2a1f7fc4-b122-eac6-1123-1bffec13dd34.png)
 
 # :large_orange_diamond: Action: 以下のコマンドを入力してください。一気に全部コピー & ペーストして実行して構いません。
 
@@ -63,7 +63,7 @@ npm run generate
 
 # :large_orange_diamond: Action: 新しいターミナルを立ち上げてください。
 
-# ![アートボード 3.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/75738/434595ea-e610-5830-44f2-5a9e58e4c9fe.png)
+# ![アートボード 16.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/75738/bee9641c-c23d-7dc1-3518-b09e7d212a58.png)
 
 # :large_orange_diamond: Action: 以下のコマンドを入力してください。
 
