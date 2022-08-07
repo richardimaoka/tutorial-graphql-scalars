@@ -38,7 +38,6 @@ git apply patches/20f9644.patch # many custom scalars
 
 # </div></details>
 
-
 # <details><summary>:white_check_mark: Result: 上記コマンドで更新される schema.gql</summary><div>
 
 # ```diff:server/schema.gql
@@ -147,6 +146,7 @@ git apply patches/20f9644.patch # many custom scalars
 
 # <details><summary>:white_check_mark: Result: Apollo Studio Explorerで確認</summary><div>
 
+# ![2022-08-08_00h37_18.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/75738/93190d7f-e8e2-ebd4-6d0f-9c1497bec43b.png)
 
 # ---
 

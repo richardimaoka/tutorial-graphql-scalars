@@ -239,7 +239,7 @@ git apply patches/4efc7a3.patch # wrong email address format passes type checkin
 
 # <details><summary>:white_check_mark: Result: Apollo Studio Explorerでランタイムエラーを確認</summary><div>
 
-# https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/75738/d5bb9f73-4e20-3c32-9eeb-41e5e4d6c055.png
+# ![2022-08-08_00h28_44.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/75738/d0bbfce6-f18a-582c-5896-ec953f159c8d.png)
 
 # ---
 
