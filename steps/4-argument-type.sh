@@ -11,6 +11,8 @@ cd ../ || exit               # REMOVE THIS IN aggregate.sh - cd to the git repos
 
 # ```shell
 git apply patches/7833b58.patch # add CountryCode to schema.gql
+git apply patches/c1d6bcd.patch # add country to index.ts
+git apply patches/3f8aece.patch # update data/Query.json
 # ```
 
 # <details><summary>:white_check_mark: Result: 上記コマンドで更新される schema.gql</summary><div>
@@ -34,12 +36,6 @@ git apply patches/7833b58.patch # add CountryCode to schema.gql
 # ---
 
 # </div></details>
-
-# :large_orange_diamond: Action: 以下のコマンドを入力してください。
-
-# ```shell
-git apply patches/c1d6bcd.patch # add country to index.ts
-# ```
 
 # <details><summary>:white_check_mark: Result: 上記コマンドで更新される index.ts</summary><div>
 
@@ -79,12 +75,6 @@ git apply patches/c1d6bcd.patch # add country to index.ts
 # ---
 
 # </div></details>
-
-# :large_orange_diamond: Action: 以下のコマンドを入力してください。
-
-# ```shell
-git apply patches/3f8aece.patch # update data/Query.json
-# ```
 
 # <details><summary>:white_check_mark: Result: 上記コマンドで更新される Query.json</summary><div>
 

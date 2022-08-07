@@ -246,7 +246,7 @@ git apply patches/4efc7a3.patch # wrong email address format passes type checkin
 # </div></details>
 
 # :::note info
-# TypeScriptの静的型チェックによってEmailAddressに変換できない形式のstringをエラーとして検出するには、このチュートリアルのあとの方で紹介する独自typeの定義を使ったテクニックが必要です。
+# TypeScriptの静的型チェックによってEmailAddressに変換できない形式のstringをエラーとして検出するには、このチュートリアルの5. および 6. で紹介する独自型の定義を使ったテクニックが必要です。
 # :::
 
 # それでは、graphql-scalarsが提供する機能のみを使った場合の型チェックの動作がわかったので、emailAddressをQuery.jsonファイルから値を取得する形に戻します。
