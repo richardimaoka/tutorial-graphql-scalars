@@ -1,0 +1,52 @@
+commit 3420df7c4d0bd9992ae4f5a5688e373325979da8
+Author: Richard Imaoka <richard.e.imaoka@gmail.com>
+Date:   Sat Aug 6 17:20:22 2022 +0900
+
+    revert back index.ts
+
+diff --git a/server/src/index.ts b/server/src/index.ts
+index e179a9e..12efd40 100644
+--- a/server/src/index.ts
++++ b/server/src/index.ts
+@@ -2,24 +2,11 @@ import { ApolloServer, gql } from "apollo-server";
+ import * as fs from "fs";
+ import { CountryCodeResolver, EmailAddressResolver } from "graphql-scalars";
+ import { Query, Resolvers } from "./generated/graphql";
+-import { EmailAddressString, isEmailAddressString } from "./myTypes";
+ 
+ const typeDefs = gql`
+   ${fs.readFileSync(__dirname.concat("/../schema.gql"), "utf8")}
+ `;
+ 
+-const loadEmailDeepInsideServer = (): EmailAddressString => {
+-  // somewhere like database, deep inside the server side...
+-  const valueFromDatabase = "jason.summerwinnter@gmail.com";
+-  if (isEmailAddressString(valueFromDatabase)) {
+-    return valueFromDatabase;
+-  } else {
+-    throw new TypeError(
+-      `value from database = ${valueFromDatabase} is not a valid email address`
+-    );
+-  }
+-};
+-
+ interface LoadingDataContext {
+   Query: Query;
+ }
+@@ -37,14 +24,8 @@ const resolvers: Resolvers<LoadingDataContext> = {
+     name(parent, _args, _context, _info) {
+       return parent.name;
+     },
+-    emailAddress(_parent, _args, _context, _info) {
+-      try {
+-        const email = loadEmailDeepInsideServer();
+-        return email;
+-      } catch (error) {
+-        console.log(error);
+-        throw new Error("An internal error occurred!");
+-      }
++    emailAddress(parent, _args, _context, _info) {
++      return parent.emailAddress;
+     },
+     country(parent, _args, _context, _info) {
+       return parent.country;

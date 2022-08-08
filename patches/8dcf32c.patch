@@ -1,0 +1,19 @@
+commit 8dcf32c8d961d98856a7272dba50aaf8570f274f
+Author: Richard Imaoka <richard.e.imaoka@gmail.com>
+Date:   Sat Aug 6 09:08:31 2022 +0900
+
+    revert the emailAddress back to parent.emailAddress
+
+diff --git a/server/src/index.ts b/server/src/index.ts
+index 4314fb3..fd7197d 100644
+--- a/server/src/index.ts
++++ b/server/src/index.ts
+@@ -22,7 +22,7 @@ const resolvers: Resolvers<LoadingDataContext> = {
+       return parent.name;
+     },
+     emailAddress(parent, _args, _context, _info) {
+-      return "jason.summerwinnter@@@@gmail.com";
++      return parent.emailAddress;
+     },
+   },
+   EmailAddress: EmailAddressResolver,

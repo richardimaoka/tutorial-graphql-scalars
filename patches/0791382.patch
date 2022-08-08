@@ -1,0 +1,19 @@
+commit 0791382db542072ac62cebe8ed1c59a5fe12286e
+Author: Richard Imaoka <richard.e.imaoka@gmail.com>
+Date:   Tue Aug 9 03:35:10 2022 +0900
+
+    update npm start
+
+diff --git a/steps/1-setup-apollo-server-and-codegen.sh b/steps/1-setup-apollo-server-and-codegen.sh
+index 2cc9314..704130d 100755
+--- a/steps/1-setup-apollo-server-and-codegen.sh
++++ b/steps/1-setup-apollo-server-and-codegen.sh
+@@ -23,7 +23,7 @@ npx tsc --init
+ 
+ # # ts-node-dev: watch and restart a TypeScript server
+ npm install --save-dev ts-node-dev
+-npm set-script start "ts-node-dev --respawn src/index.ts"
++npm pkg set scripts.start="ts-node-dev --watch src/* --respawn src/index.ts"
+ 
+ # # apollo server
+ npm install apollo-server graphql

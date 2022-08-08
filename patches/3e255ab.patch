@@ -1,0 +1,19 @@
+commit 3e255abe13cde32fcf069b94c0718a9fd5ed31f7
+Author: Richard Imaoka <richard.e.imaoka@gmail.com>
+Date:   Sat Aug 6 09:03:58 2022 +0900
+
+    return 10 in EmailAddress
+
+diff --git a/server/src/index.ts b/server/src/index.ts
+index fd7197d..ae64035 100644
+--- a/server/src/index.ts
++++ b/server/src/index.ts
+@@ -22,7 +22,7 @@ const resolvers: Resolvers<LoadingDataContext> = {
+       return parent.name;
+     },
+     emailAddress(parent, _args, _context, _info) {
+-      return parent.emailAddress;
++      return 10;
+     },
+   },
+   EmailAddress: EmailAddressResolver,

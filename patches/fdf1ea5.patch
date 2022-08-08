@@ -1,0 +1,19 @@
+commit fdf1ea52b6bac029af9d5f38620c3648c63087cf
+Author: Richard Imaoka <richard.e.imaoka@gmail.com>
+Date:   Sat Aug 6 10:08:09 2022 +0900
+
+    emailAddress does not allow plain string
+
+diff --git a/server/src/index.ts b/server/src/index.ts
+index 12efd40..25bcb21 100644
+--- a/server/src/index.ts
++++ b/server/src/index.ts
+@@ -25,7 +25,7 @@ const resolvers: Resolvers<LoadingDataContext> = {
+       return parent.name;
+     },
+     emailAddress(parent, _args, _context, _info) {
+-      return parent.emailAddress;
++      return "jason.summerwinnter@gmail.com";
+     },
+     country(parent, _args, _context, _info) {
+       return parent.country;

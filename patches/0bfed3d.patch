@@ -1,0 +1,19 @@
+commit 0bfed3d55ac88c029d74a901b84432059a3c74d2
+Author: Richard Imaoka <richard.e.imaoka@gmail.com>
+Date:   Sat Aug 6 09:07:25 2022 +0900
+
+    wrong email address format passes type checking
+
+diff --git a/server/src/index.ts b/server/src/index.ts
+index ae64035..4314fb3 100644
+--- a/server/src/index.ts
++++ b/server/src/index.ts
+@@ -22,7 +22,7 @@ const resolvers: Resolvers<LoadingDataContext> = {
+       return parent.name;
+     },
+     emailAddress(parent, _args, _context, _info) {
+-      return 10;
++      return "jason.summerwinnter@@@@gmail.com";
+     },
+   },
+   EmailAddress: EmailAddressResolver,

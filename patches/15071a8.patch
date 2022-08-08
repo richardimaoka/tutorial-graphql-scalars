@@ -1,0 +1,308 @@
+commit 15071a873ad5d8d710ea3ccf34ba97c49aefca64
+Author: Richard Imaoka <richard.e.imaoka@gmail.com>
+Date:   Sat Aug 6 18:27:39 2022 +0900
+
+    Revert "many custom scalars"
+    
+    This reverts commit 4b74b088c7cbf75f5ce1500205a1952455bb4e6a.
+
+diff --git a/server/data/Query.json b/server/data/Query.json
+index aa5864e..b474129 100644
+--- a/server/data/Query.json
++++ b/server/data/Query.json
+@@ -1,14 +1,6 @@
+ {
+   "me": {
+-    "name": "Jason Summerwinter",
+-    "birthDate": "1992-12-03T10:15:30Z",
+-    "ageInYears": 30,
+-    "heightInInches": 180,
+-    "minimumHourlyRate": 3000,
+-    "currentlyActiveProjects": 3,
+-    "emailAddress": "jason.summerwinter@gmail.com",
+-    "homePage": "https://json.summer.winter.com",
+-    "phoneNumber": "+12312345678",
+-    "homePostalCode": "010-0000"
++    "emailAddress": "jason.summerwinnter@gmail.com",
++    "name": "Jason Summerwinter"
+   }
+ }
+diff --git a/server/schema.gql b/server/schema.gql
+index 9d493ec..acd47e6 100644
+--- a/server/schema.gql
++++ b/server/schema.gql
+@@ -1,24 +1,8 @@
+-scalar DateTime
+-scalar PositiveInt
+-scalar PositiveFloat
+-scalar NonNegativeFloat
+-scalar NonNegativeInt
+ scalar EmailAddress
+-scalar URL
+-scalar PhoneNumber
+-scalar PostalCode
+ 
+ type Person {
+-  name: String
+-  birthDate: DateTime
+-  ageInYears: PositiveInt
+-  heightInInches: PositiveFloat
+-  minimumHourlyRate: NonNegativeFloat
+-  currentlyActiveProjects: NonNegativeInt
+   emailAddress: EmailAddress
+-  homePage: URL
+-  phoneNumber: PhoneNumber
+-  homePostalCode: PostalCode
++  name: String
+ }
+ 
+ type Query {
+diff --git a/server/src/generated/graphql.ts b/server/src/generated/graphql.ts
+index 449cef2..0270e8f 100644
+--- a/server/src/generated/graphql.ts
++++ b/server/src/generated/graphql.ts
+@@ -21,29 +21,13 @@ export type Scalars = {
+   Boolean: boolean;
+   Int: number;
+   Float: number;
+-  DateTime: any;
+   EmailAddress: string;
+-  NonNegativeFloat: any;
+-  NonNegativeInt: any;
+-  PhoneNumber: any;
+-  PositiveFloat: any;
+-  PositiveInt: any;
+-  PostalCode: any;
+-  URL: any;
+ };
+ 
+ export type Person = {
+   __typename?: "Person";
+-  ageInYears: Maybe<Scalars["PositiveInt"]>;
+-  birthDate: Maybe<Scalars["DateTime"]>;
+-  currentlyActiveProjects: Maybe<Scalars["NonNegativeInt"]>;
+   emailAddress: Maybe<Scalars["EmailAddress"]>;
+-  heightInInches: Maybe<Scalars["PositiveFloat"]>;
+-  homePage: Maybe<Scalars["URL"]>;
+-  homePostalCode: Maybe<Scalars["PostalCode"]>;
+-  minimumHourlyRate: Maybe<Scalars["NonNegativeFloat"]>;
+   name: Maybe<Scalars["String"]>;
+-  phoneNumber: Maybe<Scalars["PhoneNumber"]>;
+ };
+ 
+ export type Query = {
+@@ -159,126 +143,39 @@ export type DirectiveResolverFn<
+ /** Mapping between all available schema types and the resolvers types */
+ export type ResolversTypes = {
+   Boolean: ResolverTypeWrapper<Scalars["Boolean"]>;
+-  DateTime: ResolverTypeWrapper<Scalars["DateTime"]>;
+   EmailAddress: ResolverTypeWrapper<Scalars["EmailAddress"]>;
+-  NonNegativeFloat: ResolverTypeWrapper<Scalars["NonNegativeFloat"]>;
+-  NonNegativeInt: ResolverTypeWrapper<Scalars["NonNegativeInt"]>;
+   Person: ResolverTypeWrapper<Person>;
+-  PhoneNumber: ResolverTypeWrapper<Scalars["PhoneNumber"]>;
+-  PositiveFloat: ResolverTypeWrapper<Scalars["PositiveFloat"]>;
+-  PositiveInt: ResolverTypeWrapper<Scalars["PositiveInt"]>;
+-  PostalCode: ResolverTypeWrapper<Scalars["PostalCode"]>;
+   Query: ResolverTypeWrapper<{}>;
+   String: ResolverTypeWrapper<Scalars["String"]>;
+-  URL: ResolverTypeWrapper<Scalars["URL"]>;
+ };
+ 
+ /** Mapping between all available schema types and the resolvers parents */
+ export type ResolversParentTypes = {
+   Boolean: Scalars["Boolean"];
+-  DateTime: Scalars["DateTime"];
+   EmailAddress: Scalars["EmailAddress"];
+-  NonNegativeFloat: Scalars["NonNegativeFloat"];
+-  NonNegativeInt: Scalars["NonNegativeInt"];
+   Person: Person;
+-  PhoneNumber: Scalars["PhoneNumber"];
+-  PositiveFloat: Scalars["PositiveFloat"];
+-  PositiveInt: Scalars["PositiveInt"];
+-  PostalCode: Scalars["PostalCode"];
+   Query: {};
+   String: Scalars["String"];
+-  URL: Scalars["URL"];
+ };
+ 
+-export interface DateTimeScalarConfig
+-  extends GraphQLScalarTypeConfig<ResolversTypes["DateTime"], any> {
+-  name: "DateTime";
+-}
+-
+ export interface EmailAddressScalarConfig
+   extends GraphQLScalarTypeConfig<ResolversTypes["EmailAddress"], any> {
+   name: "EmailAddress";
+ }
+ 
+-export interface NonNegativeFloatScalarConfig
+-  extends GraphQLScalarTypeConfig<ResolversTypes["NonNegativeFloat"], any> {
+-  name: "NonNegativeFloat";
+-}
+-
+-export interface NonNegativeIntScalarConfig
+-  extends GraphQLScalarTypeConfig<ResolversTypes["NonNegativeInt"], any> {
+-  name: "NonNegativeInt";
+-}
+-
+ export type PersonResolvers<
+   ContextType = any,
+   ParentType extends ResolversParentTypes["Person"] = ResolversParentTypes["Person"]
+ > = {
+-  ageInYears: Resolver<
+-    Maybe<ResolversTypes["PositiveInt"]>,
+-    ParentType,
+-    ContextType
+-  >;
+-  birthDate: Resolver<
+-    Maybe<ResolversTypes["DateTime"]>,
+-    ParentType,
+-    ContextType
+-  >;
+-  currentlyActiveProjects: Resolver<
+-    Maybe<ResolversTypes["NonNegativeInt"]>,
+-    ParentType,
+-    ContextType
+-  >;
+   emailAddress: Resolver<
+     Maybe<ResolversTypes["EmailAddress"]>,
+     ParentType,
+     ContextType
+   >;
+-  heightInInches: Resolver<
+-    Maybe<ResolversTypes["PositiveFloat"]>,
+-    ParentType,
+-    ContextType
+-  >;
+-  homePage: Resolver<Maybe<ResolversTypes["URL"]>, ParentType, ContextType>;
+-  homePostalCode: Resolver<
+-    Maybe<ResolversTypes["PostalCode"]>,
+-    ParentType,
+-    ContextType
+-  >;
+-  minimumHourlyRate: Resolver<
+-    Maybe<ResolversTypes["NonNegativeFloat"]>,
+-    ParentType,
+-    ContextType
+-  >;
+   name: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
+-  phoneNumber: Resolver<
+-    Maybe<ResolversTypes["PhoneNumber"]>,
+-    ParentType,
+-    ContextType
+-  >;
+   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+ };
+ 
+-export interface PhoneNumberScalarConfig
+-  extends GraphQLScalarTypeConfig<ResolversTypes["PhoneNumber"], any> {
+-  name: "PhoneNumber";
+-}
+-
+-export interface PositiveFloatScalarConfig
+-  extends GraphQLScalarTypeConfig<ResolversTypes["PositiveFloat"], any> {
+-  name: "PositiveFloat";
+-}
+-
+-export interface PositiveIntScalarConfig
+-  extends GraphQLScalarTypeConfig<ResolversTypes["PositiveInt"], any> {
+-  name: "PositiveInt";
+-}
+-
+-export interface PostalCodeScalarConfig
+-  extends GraphQLScalarTypeConfig<ResolversTypes["PostalCode"], any> {
+-  name: "PostalCode";
+-}
+-
+ export type QueryResolvers<
+   ContextType = any,
+   ParentType extends ResolversParentTypes["Query"] = ResolversParentTypes["Query"]
+@@ -286,21 +183,8 @@ export type QueryResolvers<
+   me: Resolver<Maybe<ResolversTypes["Person"]>, ParentType, ContextType>;
+ };
+ 
+-export interface UrlScalarConfig
+-  extends GraphQLScalarTypeConfig<ResolversTypes["URL"], any> {
+-  name: "URL";
+-}
+-
+ export type Resolvers<ContextType = any> = {
+-  DateTime: GraphQLScalarType;
+   EmailAddress: GraphQLScalarType;
+-  NonNegativeFloat: GraphQLScalarType;
+-  NonNegativeInt: GraphQLScalarType;
+   Person: PersonResolvers<ContextType>;
+-  PhoneNumber: GraphQLScalarType;
+-  PositiveFloat: GraphQLScalarType;
+-  PositiveInt: GraphQLScalarType;
+-  PostalCode: GraphQLScalarType;
+   Query: QueryResolvers<ContextType>;
+-  URL: GraphQLScalarType;
+ };
+diff --git a/server/src/index.ts b/server/src/index.ts
+index 6d0fcea..fd7197d 100644
+--- a/server/src/index.ts
++++ b/server/src/index.ts
+@@ -1,16 +1,6 @@
+ import { ApolloServer, gql } from "apollo-server";
+ import * as fs from "fs";
+-import {
+-  DateTimeResolver,
+-  EmailAddressResolver,
+-  NonNegativeFloatResolver,
+-  NonNegativeIntResolver,
+-  PhoneNumberResolver,
+-  PositiveFloatResolver,
+-  PositiveIntResolver,
+-  PostalCodeResolver,
+-  URLResolver,
+-} from "graphql-scalars";
++import { EmailAddressResolver } from "graphql-scalars";
+ import { Query, Resolvers } from "./generated/graphql";
+ 
+ const typeDefs = gql`
+@@ -31,43 +21,11 @@ const resolvers: Resolvers<LoadingDataContext> = {
+     name(parent, _args, _context, _info) {
+       return parent.name;
+     },
+-    birthDate(parent, _args, _context, _info) {
+-      return parent.birthDate;
+-    },
+-    ageInYears(parent, _args, _context, _info) {
+-      return parent.ageInYears;
+-    },
+-    heightInInches(parent, _args, _context, _info) {
+-      return parent.heightInInches;
+-    },
+-    minimumHourlyRate(parent, _args, _context, _info) {
+-      return parent.minimumHourlyRate;
+-    },
+-    currentlyActiveProjects(parent, _args, _context, _info) {
+-      return parent.currentlyActiveProjects;
+-    },
+     emailAddress(parent, _args, _context, _info) {
+       return parent.emailAddress;
+     },
+-    homePage(parent, _args, _context, _info) {
+-      return parent.homePage;
+-    },
+-    phoneNumber(parent, _args, _context, _info) {
+-      return parent.phoneNumber;
+-    },
+-    homePostalCode(parent, _args, _context, _info) {
+-      return parent.homePostalCode;
+-    },
+   },
+-  DateTime: DateTimeResolver,
+-  PositiveInt: PositiveIntResolver,
+-  PositiveFloat: PositiveFloatResolver,
+-  NonNegativeFloat: NonNegativeFloatResolver,
+-  NonNegativeInt: NonNegativeIntResolver,
+   EmailAddress: EmailAddressResolver,
+-  URL: URLResolver,
+-  PhoneNumber: PhoneNumberResolver,
+-  PostalCode: PostalCodeResolver,
+ };
+ 
+ const readJsonFile = async (relativeFileName: string): Promise<any> => {
