@@ -10,9 +10,9 @@ cd ../ || exit               # REMOVE THIS IN aggregate.sh - cd to the git repos
 # :large_orange_diamond: Action: 以下のコマンドを入力してください。
 
 # ```shell
-git apply patches/7833b58.patch # add CountryCode to schema.gql
-git apply patches/c1d6bcd.patch # add country to index.ts
-git apply patches/3f8aece.patch # update data/Query.json
+git apply patches/b1acf0c.patch # add CountryCode to schema.gql
+git apply patches/09bc748.patch # add country to index.ts
+git apply patches/6c02fe8.patch # update data/Query.json
 # ```
 
 # <details><summary>:white_check_mark: Result: 上記コマンドで更新される schema.gql</summary><div>
@@ -120,11 +120,30 @@ git apply patches/3f8aece.patch # update data/Query.json
 
 # <details><summary>:white_check_mark: Result: Apollo Studio Explorerからクエリの実行</summary><div>
 
-# 型チェックエラー
-# ランタイムエラー
+# ![2022-08-09_06h00_03.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/75738/6ad07873-8c2e-123c-7632-6f5b73654089.png)
 
 # ---
 
 # </div></details>
 
-# argumentでcustom scalarを使ったときの動作がこれで確認できました。
+# <details><summary>:white_check_mark: Apollo Studio Explorerで不正な形式のCountryCodeを渡して、ランタイムエラーを確認</summary><div>
+
+# countryにCountryCodeではない不正な形式のStringを渡すと、静的型チェックエラーではなくランタイムエラーになります
+
+# ![image.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/75738/cd3991a8-5e3c-6734-7340-57e5bded3cd7.png)
+
+# ---
+
+# </div></details>
+
+# <details><summary>:white_check_mark: Apollo Studio Explorerで、Int型の値を渡してランタイムエラーを確認</summary><div>
+
+# countryに10を渡しても、静的型チェックエラーではなくランタイムエラーになります
+
+# ![2022-08-09_06h07_46.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/75738/49dc3907-fb5f-377c-2d43-7e882ef63279.png)
+
+# ---
+
+# </div></details>
+
+# GraphQL のクエリ側では、クエリ・リテラルの静的型チェックエラーは働きません。argumentでcustom scalarを使ったときの動作がこれで確認できました。

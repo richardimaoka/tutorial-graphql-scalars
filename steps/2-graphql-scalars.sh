@@ -19,7 +19,7 @@ cd ../ || exit               # REMOVE THIS IN aggregate.sh - cd to the git repos
 # :large_orange_diamond: Action: 以下のコマンドを入力してください。
 
 # ```shell
-git apply patches/258a5ef.patch # update schema.gql
+git apply patches/e7c78aa.patch # update schema.gql
 # ```
 
 # <details><summary>:white_check_mark: Result: 上記コマンドで更新される schema.gql</summary><div>
@@ -53,8 +53,8 @@ Error: Query.hello defined in resolvers, but not in schema
 
 
 # ```shell
-git apply patches/4bf1886.patch # update index.ts
-git apply patches/6d40e7f.patch # update Query.json
+git apply patches/94f9796.patch # update index.ts
+git apply patches/789bf5a.patch # update Query.json
 # ```
 
 
@@ -144,7 +144,7 @@ git apply patches/6d40e7f.patch # update Query.json
 # :large_orange_diamond: Action: 以下のコマンドを入力してください。
 
 # ```shell
-git apply patches/8008a13.patch # return 10 in EmailAddress
+git apply patches/3e255ab.patch # return 10 in EmailAddress
 # ```
 
 # <details><summary>:white_check_mark: Result: 上記コマンドで更新される index.ts</summary><div>
@@ -160,14 +160,23 @@ git apply patches/8008a13.patch # return 10 in EmailAddress
 
 # </div></details>
 
-# 上記のソースコードは `return 10` としてnumber型の値を返していますが、TypeScriptの型チェックはエラーを出力してくれません。
+# <details><summary> :white_check_mark: Result: Apollo Studio Explorerでランタイムエラーを確認</summary><div>
+
+# ![2022-08-09_05h46_24.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/75738/a72a1d8e-a33e-55bd-0452-828c056993bb.png)
+
+# ---
+
+# </div></details>
+
+
+# 上記のソースコードは `return 10` としてnumber型の値を返していて、ランタイムエラーは出力されるのですが、TypeScriptの静的型チェックはエラーを出力してくれません。
 
 # number型ではGraphQLのEmailAddress型の値を表現できないので、TypeScriptの型チェックでエラーを出してほしいところです。そこで以下の変更を行いましょう。
 
 # :large_orange_diamond: Action: 以下のコマンドを入力してください。
 
 # ```shell
-git apply patches/e60bb3a.patch # Update codegen.yml to set EmailAddress as string
+git apply patches/12e6f2b.patch # Update codegen.yml to set EmailAddress as string
 # ```
 
 # <details><summary>:white_check_mark: Result: 上記コマンドで更新される config.yml</summary><div>
@@ -209,7 +218,7 @@ git apply patches/e60bb3a.patch # Update codegen.yml to set EmailAddress as stri
 
 # 上記の変更によって、型チェックが働きます。stringが期待されるemailAddressのResolverでnumberをreturnすると、エラーが表示されることが確認できます。
 
-# <details><summary>:white_check_mark: Result: エラーの確認</summary><div>
+# <details><summary>:white_check_mark: Result: TypeScript型チェックによるエラーの確認</summary><div>
 
 # ![2022-08-06_21h33_37.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/75738/11ef1c95-72e1-1ce8-446b-dd61a50cfb23.png)
 
@@ -234,7 +243,7 @@ git apply patches/e60bb3a.patch # Update codegen.yml to set EmailAddress as stri
 # :large_orange_diamond: Action: 以下のコマンドを入力してください。
 
 # ```shell
-git apply patches/4efc7a3.patch # wrong email address format passes type checking
+git apply patches/0bfed3d.patch # wrong email address format passes type checking
 # ```
 
 # <details><summary>:white_check_mark: Result: 上記コマンドで更新される index.ts</summary><div>
@@ -269,7 +278,7 @@ git apply patches/4efc7a3.patch # wrong email address format passes type checkin
 # :large_orange_diamond: Action: 以下のコマンドを入力してください。
 
 # ```shell
-git apply patches/f9b9f77.patch # revert the emailAddress back to parent.emailAddress
+git apply patches/8dcf32c.patch # revert the emailAddress back to parent.emailAddress
 # ```
 
 # <details><summary>:white_check_mark: Result: 上記コマンドで更新される index.ts</summary><div>

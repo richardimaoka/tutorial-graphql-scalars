@@ -10,7 +10,7 @@ cd ../ || exit               # REMOVE THIS IN aggregate.sh - cd to the git repos
 # :large_orange_diamond: Action: 以下のコマンドを入力してください。
 
 # ```shell
-git apply patches/20f9644.patch # many custom scalars
+git apply patches/59c46fb.patch # many custom scalars
 # ```
 
 # <details><summary>:white_check_mark: Result: 上記コマンドで更新される Query.json</summary><div>
@@ -157,5 +157,5 @@ git apply patches/20f9644.patch # many custom scalars
 # :large_orange_diamond: Action: 以下のコマンドを入力してください。
 
 # ```shell
-git apply patches/f552f71.patch # Revert "many custom scalars"
+git apply patches/15071a8.patch # Revert "many custom scalars"
 # ```
