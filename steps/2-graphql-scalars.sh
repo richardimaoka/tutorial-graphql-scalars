@@ -20,8 +20,6 @@ cd ../ || exit               # REMOVE THIS IN aggregate.sh - cd to the git repos
 
 # ```shell
 git apply patches/258a5ef.patch # update schema.gql
-git apply patches/4bf1886.patch # update index.ts
-git apply patches/6d40e7f.patch # update Query.json
 # ```
 
 # <details><summary>:white_check_mark: Result: 上記コマンドで更新される schema.gql</summary><div>
@@ -42,6 +40,23 @@ git apply patches/6d40e7f.patch # update Query.json
 # ---
 
 # </div></details>
+
+# :white_check_mark: Result: この状態ではエラーが出ます
+
+# ```:terminal
+Error: Query.hello defined in resolvers, but not in schema   
+# ```
+
+# このエラーを解決しましょう。
+
+# :large_orange_diamond: Action: 以下のコマンドを入力してください。
+
+
+# ```shell
+git apply patches/4bf1886.patch # update index.ts
+git apply patches/6d40e7f.patch # update Query.json
+# ```
+
 
 # <details><summary>:white_check_mark: Result: 上記コマンドで更新される index.ts</summary><div>
 
