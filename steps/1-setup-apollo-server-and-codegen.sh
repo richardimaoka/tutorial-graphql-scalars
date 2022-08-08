@@ -23,7 +23,7 @@ npx tsc --init
 
 # # ts-node-dev: watch and restart a TypeScript server
 npm install --save-dev ts-node-dev
-npm set-script start "ts-node-dev --respawn src/index.ts"
+npm pkg set scripts.start="ts-node-dev --watch src/* --respawn src/index.ts"
 
 # # apollo server
 npm install apollo-server graphql
