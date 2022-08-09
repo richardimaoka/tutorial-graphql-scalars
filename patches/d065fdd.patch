@@ -1,0 +1,55 @@
+commit d065fddfb1bf33b8d7b50c764a9a81e19c5e5418
+Author: Richard Imaoka <richard.e.imaoka@gmail.com>
+Date:   Sat Aug 6 11:19:35 2022 +0900
+
+    email is validated near the database
+
+diff --git a/server/src/index.ts b/server/src/index.ts
+index ae756ea..7747adf 100644
+--- a/server/src/index.ts
++++ b/server/src/index.ts
+@@ -1,13 +1,25 @@
+-import { EmailAddressString, isEmailAddressString } from "./myTypes";
+ import { ApolloServer, gql } from "apollo-server";
+ import * as fs from "fs";
+ import { CountryCodeResolver, EmailAddressResolver } from "graphql-scalars";
+ import { Query, Resolvers } from "./generated/graphql";
++import { EmailAddressString, isEmailAddressString } from "./myTypes";
+ 
+ const typeDefs = gql`
+   ${fs.readFileSync(__dirname.concat("/../schema.gql"), "utf8")}
+ `;
+ 
++const loadEmailDeepInsideServer = (): EmailAddressString => {
++  // somewhere like database, deep inside the server side...
++  const valueFromDatabase = "jason.summerwinnter@gmail.com";
++  if (isEmailAddressString(valueFromDatabase)) {
++    return valueFromDatabase;
++  } else {
++    throw new TypeError(
++      `value from database = ${valueFromDatabase} is not a valid email address`
++    );
++  }
++};
++
+ interface LoadingDataContext {
+   Query: Query;
+ }
+@@ -25,11 +37,13 @@ const resolvers: Resolvers<LoadingDataContext> = {
+     name(parent, _args, _context, _info) {
+       return parent.name;
+     },
+-    emailAddress(parent, _args, _context, _info) {
+-      const email = "jason.summerwinnter@gmail.com";
+-      if (isEmailAddressString(email)) {
++    emailAddress(_parent, _args, _context, _info) {
++      try {
++        const email = loadEmailDeepInsideServer();
+         return email;
+-      } else {
++      } catch (error) {
++        //the server log only, not exposing the internal error detail to the API caller
++        console.log(error);
+         throw new Error(
+           "Internal Error occurred: could not retrieve emailAddress"
+         );

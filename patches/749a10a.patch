@@ -1,0 +1,19 @@
+commit 749a10a88bd807393b590626ab7a984895ed398b
+Author: Richard Imaoka <richard.e.imaoka@gmail.com>
+Date:   Sat Aug 6 11:36:12 2022 +0900
+
+    correct email format
+
+diff --git a/server/src/index.ts b/server/src/index.ts
+index 0ee88d8..7747adf 100644
+--- a/server/src/index.ts
++++ b/server/src/index.ts
+@@ -10,7 +10,7 @@ const typeDefs = gql`
+ 
+ const loadEmailDeepInsideServer = (): EmailAddressString => {
+   // somewhere like database, deep inside the server side...
+-  const valueFromDatabase = "jason.summerwinnter@@@@gmail.com";
++  const valueFromDatabase = "jason.summerwinnter@gmail.com";
+   if (isEmailAddressString(valueFromDatabase)) {
+     return valueFromDatabase;
+   } else {

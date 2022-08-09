@@ -1,0 +1,21 @@
+commit d224c5ef3acde27ada37dd0766228c2c3c0edda7
+Author: Richard Imaoka <richard.e.imaoka@gmail.com>
+Date:   Wed Aug 10 04:38:17 2022 +0900
+
+    args.country is typed as CountryString
+
+diff --git a/server/src/index.ts b/server/src/index.ts
+index 12efd40..1cf7129 100644
+--- a/server/src/index.ts
++++ b/server/src/index.ts
+@@ -16,7 +16,9 @@ const resolvers: Resolvers<LoadingDataContext> = {
+     me(_parent, _args, context, _info) {
+       return context.Query.me;
+     },
+-    search(_parent, _args, context, _info) {
++    search(_parent, args, context, _info) {
++      const countryString = args.country;
++      console.log(countryString);
+       return context.Query.search;
+     },
+   },

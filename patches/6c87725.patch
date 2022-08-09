@@ -1,0 +1,45 @@
+commit 6c877254f53beaea42eb76bf94410003ca5f8c86
+Author: Richard Imaoka <richard.e.imaoka@gmail.com>
+Date:   Sat Aug 6 20:14:05 2022 +0900
+
+    scripts updated===========================
+
+diff --git a/scripts/aggregate.sh b/scripts/aggregate.sh
+index 9ea198a..904ff19 100755
+--- a/scripts/aggregate.sh
++++ b/scripts/aggregate.sh
+@@ -3,7 +3,7 @@
+ cd "$(dirname "$0")" || exit 
+ cd ../ || exit # cd to the git repository root
+ 
+-AGGREGATED=$(find steps/2* -print0 | \
++AGGREGATED=$(find steps/* -print0 | \
+   xargs -0 cat | \
+   grep -v '#!/bin/sh' | \
+   grep -v '# REMOVE THIS' | \
+diff --git a/scripts/git-apply-print.sh b/scripts/git-apply-print.sh
+index fc55a9e..2cadb87 100755
+--- a/scripts/git-apply-print.sh
++++ b/scripts/git-apply-print.sh
+@@ -3,7 +3,7 @@
+ cd "$(dirname "$0")" || exit 
+ cd ../ || exit # cd to the git repository root
+ 
+-git log --oneline --reverse | sed -r 's/(^\w+\b)/git apply patches\/\1.patch #/'
++git log --oneline --reverse 66e0095..  | sed -r 's/(^\w+\b)/git apply patches\/\1.patch #/'
+ 
+ # if you want to start from a certain commit (e.g.) dc61691
+ # > git log --oneline --reverse dc61691 | sed -r 's/(^\w+\b)/git apply patches\/\1.patch #/'
+diff --git a/scripts/git-patch-gen.sh b/scripts/git-patch-gen.sh
+index 48f8c57..010c249 100755
+--- a/scripts/git-patch-gen.sh
++++ b/scripts/git-patch-gen.sh
+@@ -3,7 +3,7 @@
+ cd "$(dirname "$0")" || exit 
+ cd ../ || exit # cd to the git repository root
+ 
+-git log --oneline --reverse | \
++git log --oneline --reverse 66e0095.. | \
+    sed -r 's/(^\w+\b)(.*)/git show --binary --patch \1 > patches\/\1.patch/'
+ 
+ # if you want to start from a certain commit (e.g.) dc61691

@@ -1,0 +1,31 @@
+commit 8b4740d8d1fecf0c03319a0d9887a2ebbb5b0c8e
+Author: Richard Imaoka <richard.e.imaoka@gmail.com>
+Date:   Wed Aug 10 04:25:30 2022 +0900
+
+    explicit type checking by type predicates
+
+diff --git a/server/src/index.ts b/server/src/index.ts
+index 25bcb21..ae756ea 100644
+--- a/server/src/index.ts
++++ b/server/src/index.ts
+@@ -1,3 +1,4 @@
++import { EmailAddressString, isEmailAddressString } from "./myTypes";
+ import { ApolloServer, gql } from "apollo-server";
+ import * as fs from "fs";
+ import { CountryCodeResolver, EmailAddressResolver } from "graphql-scalars";
+@@ -25,7 +26,14 @@ const resolvers: Resolvers<LoadingDataContext> = {
+       return parent.name;
+     },
+     emailAddress(parent, _args, _context, _info) {
+-      return "jason.summerwinnter@gmail.com";
++      const email = "jason.summerwinnter@gmail.com";
++      if (isEmailAddressString(email)) {
++        return email;
++      } else {
++        throw new Error(
++          "Internal Error occurred: could not retrieve emailAddress"
++        );
++      }
+     },
+     country(parent, _args, _context, _info) {
+       return parent.country;
