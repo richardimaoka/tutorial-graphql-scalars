@@ -16,7 +16,9 @@ const resolvers: Resolvers<LoadingDataContext> = {
     me(_parent, _args, context, _info) {
       return context.Query.me;
     },
-    search(_parent, _args, context, _info) {
+    search(_parent, args, context, _info) {
+      const countryString = args.country;
+      console.log(countryString);
       return context.Query.search;
     },
   },
