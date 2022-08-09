@@ -1,3 +1,4 @@
+import { EmailAddressString, isEmailAddressString } from "./myTypes";
 import { ApolloServer, gql } from "apollo-server";
 import * as fs from "fs";
 import { CountryCodeResolver, EmailAddressResolver } from "graphql-scalars";
@@ -25,7 +26,14 @@ const resolvers: Resolvers<LoadingDataContext> = {
       return parent.name;
     },
     emailAddress(parent, _args, _context, _info) {
-      return "jason.summerwinnter@gmail.com";
+      const email = "jason.summerwinnter@gmail.com";
+      if (isEmailAddressString(email)) {
+        return email;
+      } else {
+        throw new Error(
+          "Internal Error occurred: could not retrieve emailAddress"
+        );
+      }
     },
     country(parent, _args, _context, _info) {
       return parent.country;
