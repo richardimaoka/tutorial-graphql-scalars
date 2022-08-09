@@ -4,7 +4,7 @@ cd "$(dirname "$0")" || exit # REMOVE THIS IN aggregate.sh
 cd ../ || exit               # REMOVE THIS IN aggregate.sh - cd to the git repository root
 
 
-# ## 5. (Optional) Custom scalarであるEmailAddressの情報を復元するため、TypeScriptで独自型を利用する
+# ## 5. (Optional) TypeScriptの静的型チェックによってEmailAddressに変換できない形式のstringをエラーとして検出する
 
 # 本チュートリアル[「2. graphql-scalarsをfield型に使った際の動作確認」](#2-graphql-scalars%E3%82%92field%E5%9E%8B%E3%81%AB%E4%BD%BF%E3%81%A3%E3%81%9F%E9%9A%9B%E3%81%AE%E5%8B%95%E4%BD%9C%E7%A2%BA%E8%AA%8D)の最後で、TypeScriptの型チェックを効かせて不正なメールアドレスの形式を検出するには、独自型の利用が必要なことを述べました。以下ではそのテクニックを実際に見ていきます。
 
@@ -125,7 +125,13 @@ git apply patches/fdf1ea5.patch # emailAddress does not allow plain string
 
 # </div></details>
 
-# それでは、サーバーサイドのデータベース近くでメールアドレスのチェックすることを想定したコードを挿入します。
+# これで、TypeScript型チェックを効かせてメールアドレスのフォーマットをチェックできるようになりました！
+
+# :::note info
+# この状態では、「どこかでメールアドレスのフォーマットチェック(isEmailAddressString関数)」を呼び出すことによって、静的型チェックを通すことができます。すなわち、意図せぬ値をGraphQL custom scalarのvalidatorに渡してしまってからエラーに気づくのではなく、どこでisEmailAddressStringを呼ぶか事前に判断することになります。
+# :::
+
+# それでは、データベースからの呼び出し部分付近でisEmailAddressString関数の呼び出しをする想定で、コードを更新しましょう。
 
 # :large_orange_diamond: Action: 以下のコマンドを入力してください。
 
@@ -237,6 +243,10 @@ git apply patches/f28a02e.patch # correct email format
 #      return valueFromDatabase;
 #    } else {
 # ```
+
+# ---
+
+# </div></details>
 
 # 最後に、ここまで5. で行った変更をもとに戻しましょう。
 
